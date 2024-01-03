@@ -30,7 +30,8 @@ void main_thread(void* instance) {
 		Sleep(1);
 	}
 
-	// shutdown hooks, sleep for 1 second, then unload
+	// sleep, shutdown, sleep, unload
+	Sleep(1000);
 	hooks::shutdown();
 	Sleep(1000);
 	unload(instance);

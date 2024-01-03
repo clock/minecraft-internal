@@ -41,4 +41,14 @@ namespace hooks {
 		LPDWORD lpFlags,
 		LPWSAOVERLAPPED lpOverlapped,
 		LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
+
+	int __stdcall recvHook(SOCKET s, char* buf, int len, int flags);
+
+	inline int(__stdcall* recvOriginal)(
+		SOCKET s, char* buf, int len, int flags);
+
+	int __stdcall sendHook(SOCKET s, const char* buf, int len, int flags);
+
+	inline int(__stdcall* sendOriginal)(
+		SOCKET s, const char* buf, int len, int flags);
 }
