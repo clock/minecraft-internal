@@ -3,6 +3,7 @@
 #include <jvmti.h>
 #include <unordered_map>
 #include <string>
+#include <memory>
 
 class JavaInstance {
 private:
@@ -36,6 +37,13 @@ public:
 
 			classes.emplace(std::make_pair(name_chars, classes_ptr[i]));
 		}
+	}
+
+	jclass get_class(std::string class_name) {
+		if (classes.contains(class_name))
+			return classes[class_name];
+
+		return nullptr;
 	}
 };
 

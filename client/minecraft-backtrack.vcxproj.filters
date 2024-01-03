@@ -16,6 +16,12 @@
     <Filter Include="minhook">
       <UniqueIdentifier>{1e34dc56-aec6-4b15-b8b4-dc7defc66f42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\sdk">
+      <UniqueIdentifier>{e36bc7bf-ec7c-4338-a964-4d85a82278cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sdk">
+      <UniqueIdentifier>{19547f05-c123-4e95-aa20-aaa61ab813f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entry.cpp">
@@ -38,6 +44,15 @@
     </ClCompile>
     <ClCompile Include="hooks.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mappings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_minecraft.cpp">
+      <Filter>Source Files\sdk</Filter>
+    </ClCompile>
+    <ClCompile Include="c_entity.cpp">
+      <Filter>Source Files\sdk</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +85,18 @@
     </ClInclude>
     <ClInclude Include="java.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mappings.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_minecraft.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="c_world.hpp">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="c_entity.hpp">
+      <Filter>Header Files\sdk</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

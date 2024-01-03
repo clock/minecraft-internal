@@ -6,6 +6,7 @@
 #include "include/MinHook.h"
 #include "hooks.hpp"
 #include "java.hpp"
+#include "mappings.hpp"
 
 void unload(void* instance, const char* reason = "No reason given.");
 
@@ -39,6 +40,9 @@ void main_thread(void* instance) {
 	/*hooks::init();*/
 
 	java_instance->get_loaded_classes();
+
+	// init mappings
+	init_mappings(); // in the end we will have a server that sends us the mappings for different version support.
 
 	// keeping the thread alive
 	while (!GetAsyncKeyState(VK_END)) {
