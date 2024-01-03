@@ -10,3 +10,4 @@ public:
 	jobject get_instance();
 	c_entity get_local_player();
 };
+

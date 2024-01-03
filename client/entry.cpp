@@ -7,6 +7,7 @@
 #include "hooks.hpp"
 #include "java.hpp"
 #include "mappings.hpp"
+#include "c_minecraft.hpp"
 
 void unload(void* instance, const char* reason = "No reason given.");
 
@@ -44,8 +45,13 @@ void main_thread(void* instance) {
 	// init mappings
 	init_mappings(); // in the end we will have a server that sends us the mappings for different version support.
 
+	// get minecraft instance
+	auto minecraft = std::make_unique<c_minecraft>();
+
 	// keeping the thread alive
 	while (!GetAsyncKeyState(VK_END)) {
+
+		printf("%llf\n", minecraft->get_local_player().get_x());
 
 		Sleep(1);
 	}

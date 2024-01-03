@@ -5,12 +5,13 @@
 class c_entity {
 public:
 	c_entity(jobject player_instance);
-	float get_x();
-	float get_y();
-	float get_z();
+	double get_x();
+	double get_y();
+	double get_z();
 
-	// idk
 	void cleanup();
+
+	jclass get_class();
 private:
 	jobject player_instance;
 };

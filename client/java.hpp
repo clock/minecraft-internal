@@ -32,10 +32,9 @@ public:
 			const char* name_chars = env->GetStringUTFChars(name, 0);
 
 			printf("class: %s\n", name_chars);
+			classes.emplace(std::make_pair(name_chars, classes_ptr[i]));
 
 			env->ReleaseStringUTFChars(name, name_chars);
-
-			classes.emplace(std::make_pair(name_chars, classes_ptr[i]));
 		}
 	}
 

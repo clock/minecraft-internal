@@ -9,32 +9,31 @@ void c_entity::cleanup() {
 	java_instance->env->DeleteLocalRef(this->player_instance);
 }
 
-float c_entity::get_x() {
-	jclass entity_class = java_instance->get_class(mappings["entity"].class_name);
+jclass c_entity::get_class() {
+	return java_instance->get_class(mappings["entity"].class_name);
+}
+
+double c_entity::get_x() {
+
+	jclass entity_class = get_class();
 	jfieldID x = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["x"].field_name, mappings["entity"].fields["x"].field_sig);
-	auto buf = java_instance->env->GetFloatField(this->player_instance, x);
-
-	java_instance->env->DeleteLocalRef(entity_class);
+	auto buf = java_instance->env->GetDoubleField(this->player_instance, x);
 
 	return buf;
 }
 
-float c_entity::get_y() {
-	jclass entity_class = java_instance->get_class(mappings["entity"].class_name);
+double c_entity::get_y() {
+	jclass entity_class = get_class();
 	jfieldID y = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["y"].field_name, mappings["entity"].fields["y"].field_sig);
-	auto buf = java_instance->env->GetFloatField(this->player_instance, y);
-
-	java_instance->env->DeleteLocalRef(entity_class);
+	auto buf = java_instance->env->GetDoubleField(this->player_instance, y);
 
 	return buf;
 }
 
-float c_entity::get_z() {
-	jclass entity_class = java_instance->get_class(mappings["entity"].class_name);
+double c_entity::get_z() {
+	jclass entity_class = get_class();
 	jfieldID z = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["z"].field_name, mappings["entity"].fields["z"].field_sig);
-	auto buf = java_instance->env->GetFloatField(this->player_instance, z);
-
-	java_instance->env->DeleteLocalRef(entity_class);
+	auto buf = java_instance->env->GetDoubleField(this->player_instance, z);
 
 	return buf;
 }
