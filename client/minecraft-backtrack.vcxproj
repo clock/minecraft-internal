@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="c_entity.cpp" />
     <ClCompile Include="c_minecraft.cpp" />
+    <ClCompile Include="c_world.cpp" />
     <ClCompile Include="entry.cpp" />
     <ClCompile Include="hooks.cpp" />
     <ClCompile Include="mappings.cpp" />

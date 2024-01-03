@@ -25,3 +25,15 @@ c_entity c_minecraft::get_local_player() {
 
 	return c_entity(buf);
 }
+
+c_world c_minecraft::get_world() {
+	jobject minecraft_instance = this->get_instance();
+	jclass minecraft_class = this->get_class();
+
+	jfieldID get_world = java_instance->env->GetFieldID(minecraft_class, mappings["minecraft"].fields["get_world"].field_name, mappings["minecraft"].fields["get_world"].field_sig);
+	auto buf = java_instance->env->GetObjectField(minecraft_instance, get_world);
+
+	java_instance->env->DeleteLocalRef(minecraft_instance);
+
+	return c_world(buf);
+}

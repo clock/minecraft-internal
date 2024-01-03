@@ -52,10 +52,20 @@ void main_thread(void* instance) {
 	// get minecraft instance
 	auto minecraft = std::make_unique<c_minecraft>();
 
+	auto world = std::make_unique<c_world>(minecraft->get_world());
+
 	// keeping the thread alive
 	while (!GetAsyncKeyState(VK_END)) {
 
-		printf("%llf\n", minecraft->get_local_player().get_x());
+		auto players = world->get_players();
+
+		for (auto player : players) {
+
+			printf("X: %f\n", player->get_x());
+			printf("Y: %f\n", player->get_y());
+			printf("Z: %f\n", player->get_z());
+		}
+
 
 		Sleep(1);
 	}

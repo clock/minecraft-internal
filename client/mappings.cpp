@@ -13,7 +13,7 @@ void init_mappings() {
 	// world class
 	klass world_class;
 	world_class.class_name = "net.minecraft.world.World";
-	world_class.methods["player_list"] = { "getPlayers", "()Ljava/util/List;" };
+	world_class.fields["player_list"] = { "playerEntities", "Ljava/util/List;" };
 
 	// entity class
 	klass entity_class;

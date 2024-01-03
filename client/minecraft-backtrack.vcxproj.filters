@@ -54,6 +54,9 @@
     <ClCompile Include="c_entity.cpp">
       <Filter>Source Files\sdk</Filter>
     </ClCompile>
+    <ClCompile Include="c_world.cpp">
+      <Filter>Source Files\sdk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\buffer.h">

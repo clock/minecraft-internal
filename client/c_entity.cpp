@@ -37,3 +37,7 @@ double c_entity::get_z() {
 
 	return buf;
 }
+
+c_entity::~c_entity() {
+	java_instance->env->DeleteLocalRef(this->player_instance);
+}
