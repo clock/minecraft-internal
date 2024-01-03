@@ -21,6 +21,10 @@ void main_thread(void* instance) {
 	freopen_s(reinterpret_cast<FILE**>stdin, "CONIN$", "r", stdin);
 	freopen_s(reinterpret_cast<FILE**>stdout, "CONOUT$", "w", stdout);
 
+	while (!(GetModuleHandleA(("jvm.dll")))) {
+		Sleep(500);
+	}
+
 	if (!attached)
 		unload(instance);
 
@@ -75,7 +79,9 @@ int __stdcall DllMain(void* instance, unsigned long reason_to_call, void* reserv
 	if (reason_to_call != DLL_PROCESS_ATTACH)
 		return TRUE;
 
-	CloseHandle(CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)main_thread, instance, 0, nullptr));
+	HANDLE threadHandle = CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)main_thread, instance, 0, nullptr);
+	if (threadHandle != NULL)
+		CloseHandle(threadHandle);
 
 	return TRUE;
 }
