@@ -58,15 +58,17 @@ void main_thread(void* instance) {
 	while (!GetAsyncKeyState(VK_END)) {
 
 		auto players = world->get_players();
+		static int i = 0;
 
 		for (auto player : players) {
-
+			printf("Player %d\n", i);
 			printf("X: %f\n", player->get_x());
 			printf("Y: %f\n", player->get_y());
-			printf("Z: %f\n", player->get_z());
+			printf("Z: %f\n\n", player->get_z());
+			i++;
 		}
 
-
+		i = 0;
 		Sleep(1);
 	}
 

@@ -48,7 +48,3 @@ std::vector<std::shared_ptr<c_entity>> c_world::get_players() {
 
 	return res;
 }
-
-c_world::~c_world() {
-	java_instance->env->DeleteLocalRef(this->world_instance);
-}

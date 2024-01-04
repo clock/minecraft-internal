@@ -10,7 +10,6 @@ public:
 	c_world(jobject world_instance);
 	jclass get_class();
 	std::vector<std::shared_ptr<c_entity>> get_players();
-	~c_world();
 	void cleanup();
 private:
 	jobject world_instance;
