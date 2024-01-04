@@ -24,9 +24,15 @@ void init_mappings() {
 	entity_class.fields["y"] = { "posY", "D" };
 	entity_class.fields["z"] = { "posZ", "D" };
 
+	// death
+	entity_class.fields["death"] = { "isDead", "Z" };
+
 	// yaw, pitch
 	entity_class.fields["yaw"] = { "rotationYaw", "F" };
 	entity_class.fields["pitch"] = { "rotationPitch", "F" };
+
+	// entity id
+	entity_class.methods["id"] = { "getEntityId", "()I" };
 
 	// add to mappings
 	mappings["minecraft"] = minecraft_class;

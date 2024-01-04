@@ -13,7 +13,7 @@ struct method {
 };
 
 struct klass {
-	const char* class_name;
+	const char* class_name = "";
 	std::unordered_map<std::string, field> fields;
 	std::unordered_map<std::string, method> methods;
 };

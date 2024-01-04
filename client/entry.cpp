@@ -22,9 +22,8 @@ void main_thread(void* instance) {
 	freopen_s(reinterpret_cast<FILE**>stdin, "CONIN$", "r", stdin);
 	freopen_s(reinterpret_cast<FILE**>stdout, "CONOUT$", "w", stdout);
 
-	while (!(GetModuleHandleA(("jvm.dll")))) {
+	while (!(GetModuleHandleA(("jvm.dll"))))
 		Sleep(500);
-	}
 
 	if (!attached)
 		unload(instance);

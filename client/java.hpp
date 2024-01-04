@@ -10,8 +10,8 @@ private:
 	std::unordered_map<std::string, jclass> classes;
 public:
 	// dont need to be smart pointers because they are managed by the jvm
-	JNIEnv* env;
-	JavaVM* vm;
+	JNIEnv* env = nullptr;
+	JavaVM* vm = nullptr;
 
 	void get_loaded_classes() {
 		jvmtiEnv* jvmti;
