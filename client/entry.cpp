@@ -8,7 +8,7 @@
 #include "java.hpp"
 #include "mappings.hpp"
 #include "c_minecraft.hpp"
-#include "legit.hpp"
+#include "cheat.hpp"
 
 void unload(void* instance, const char* reason = "No reason given.");
 
@@ -60,6 +60,8 @@ void main_thread(void* instance) {
 
 		// get world instance
 		auto world = std::make_unique<c_world>(minecraft->get_world());
+
+		run_cheat(std::move(minecraft), std::move(world));
 
 		Sleep(1);
 	}
