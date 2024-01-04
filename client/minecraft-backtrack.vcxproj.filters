@@ -21,6 +21,9 @@
     <Filter Include="Source Files\features\combat">
       <UniqueIdentifier>{2f47f6a1-4a78-40cc-8fc5-0970b57c2b4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\hooks">
+      <UniqueIdentifier>{b857a4c1-fe27-4ac3-9597-0b3ea3fff2cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entry.cpp">
@@ -41,12 +44,6 @@
     <ClCompile Include="src\hde\hde64.c">
       <Filter>minhook</Filter>
     </ClCompile>
-    <ClCompile Include="hooks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mappings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="c_minecraft.cpp">
       <Filter>Source Files\sdk</Filter>
     </ClCompile>
@@ -58,6 +55,12 @@
     </ClCompile>
     <ClCompile Include="legit.cpp">
       <Filter>Source Files\features\combat</Filter>
+    </ClCompile>
+    <ClCompile Include="mappings.cpp">
+      <Filter>Source Files\sdk</Filter>
+    </ClCompile>
+    <ClCompile Include="hooks.cpp">
+      <Filter>Source Files\hooks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

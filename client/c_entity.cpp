@@ -68,3 +68,22 @@ bool c_entity::is_dead() {
 
 	return buf;
 }
+
+std::string c_entity::get_name() {
+	jclass entity_class = get_class();
+
+	jmethodID get_name = java_instance->env->GetMethodID(entity_class, mappings["entity"].methods["name"].method_name, mappings["entity"].methods["name"].method_sig);
+	auto buf = java_instance->env->CallObjectMethod(this->player_instance, get_name);
+
+	jclass string_class = java_instance->env->GetObjectClass(buf);
+	jmethodID to_string = java_instance->env->GetMethodID(string_class, "toString", "()Ljava/lang/String;");
+	auto buf2 = java_instance->env->CallObjectMethod(buf, to_string);
+
+	const char* name_chars = java_instance->env->GetStringUTFChars((jstring)buf2, 0);
+
+	std::string name(name_chars);
+
+	java_instance->env->ReleaseStringUTFChars((jstring)buf2, name_chars);
+
+	return name;
+}

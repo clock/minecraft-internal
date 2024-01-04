@@ -34,6 +34,9 @@ void init_mappings() {
 	// entity id
 	entity_class.methods["id"] = { "getEntityId", "()I" };
 
+	// entity name
+	entity_class.methods["name"] = { "getName", "()Ljava/lang/String;" };
+
 	// add to mappings
 	mappings["minecraft"] = minecraft_class;
 	mappings["world"] = world_class;

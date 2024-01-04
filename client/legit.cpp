@@ -35,5 +35,5 @@ void Legit::run(std::shared_ptr<c_entity> local_player, std::unique_ptr<c_world>
 	if (closest_player == nullptr)
 		return;
 
-	printf("closest player: %d %f\\%f\\%f\n", closest_player->get_id(), closest_player->get_x(), closest_player->get_y(), closest_player->get_z());
+	printf("closest player: %s %f\\%f\\%f\n", closest_player->get_name().c_str(), closest_player->get_x(), closest_player->get_y(), closest_player->get_z());
 }
