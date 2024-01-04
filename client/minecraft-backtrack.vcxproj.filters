@@ -9,18 +9,17 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="minhook">
       <UniqueIdentifier>{1e34dc56-aec6-4b15-b8b4-dc7defc66f42}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\sdk">
-      <UniqueIdentifier>{e36bc7bf-ec7c-4338-a964-4d85a82278cd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\sdk">
       <UniqueIdentifier>{19547f05-c123-4e95-aa20-aaa61ab813f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\features">
+      <UniqueIdentifier>{a74372ca-da02-440a-a740-646c6d449992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\features\combat">
+      <UniqueIdentifier>{2f47f6a1-4a78-40cc-8fc5-0970b57c2b4f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +56,9 @@
     <ClCompile Include="c_world.cpp">
       <Filter>Source Files\sdk</Filter>
     </ClCompile>
+    <ClCompile Include="legit.cpp">
+      <Filter>Source Files\features\combat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\buffer.h">
@@ -92,14 +94,20 @@
     <ClInclude Include="mappings.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c_minecraft.hpp">
-      <Filter>Header Files\sdk</Filter>
-    </ClInclude>
     <ClInclude Include="c_world.hpp">
-      <Filter>Header Files\sdk</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="c_entity.hpp">
-      <Filter>Header Files\sdk</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_minecraft.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="legit.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cheat.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

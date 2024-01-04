@@ -152,6 +152,7 @@
     <ClCompile Include="c_world.cpp" />
     <ClCompile Include="entry.cpp" />
     <ClCompile Include="hooks.cpp" />
+    <ClCompile Include="legit.cpp" />
     <ClCompile Include="mappings.cpp" />
     <ClCompile Include="src\buffer.c" />
     <ClCompile Include="src\hde\hde32.c" />
@@ -160,12 +161,14 @@
     <ClCompile Include="src\trampoline.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cheat.hpp" />
     <ClInclude Include="c_entity.hpp" />
     <ClInclude Include="c_minecraft.hpp" />
     <ClInclude Include="c_world.hpp" />
     <ClInclude Include="hooks.hpp" />
     <ClInclude Include="include\MinHook.h" />
     <ClInclude Include="java.hpp" />
+    <ClInclude Include="legit.hpp" />
     <ClInclude Include="mappings.hpp" />
     <ClInclude Include="src\buffer.h" />
     <ClInclude Include="src\hde\hde32.h" />

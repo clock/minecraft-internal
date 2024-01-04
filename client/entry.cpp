@@ -8,6 +8,7 @@
 #include "java.hpp"
 #include "mappings.hpp"
 #include "c_minecraft.hpp"
+#include "legit.hpp"
 
 void unload(void* instance, const char* reason = "No reason given.");
 
@@ -49,26 +50,17 @@ void main_thread(void* instance) {
 	// init mappings
 	init_mappings(); // in the end we will have a server that sends us the mappings for different version support.
 
-	// get minecraft instance
-	auto minecraft = std::make_unique<c_minecraft>();
-
-	auto world = std::make_unique<c_world>(minecraft->get_world());
-
 	// keeping the thread alive
 	while (!GetAsyncKeyState(VK_END)) {
 
-		auto players = world->get_players();
-		static int i = 0;
+		// not quite sure if having these in a loop here will cause a memory leaks, but i don't think so.
 
-		for (auto player : players) {
-			printf("Player %d\n", i);
-			printf("X: %f\n", player->get_x());
-			printf("Y: %f\n", player->get_y());
-			printf("Z: %f\n\n", player->get_z());
-			i++;
-		}
+		// get minecraft instance
+		auto minecraft = std::make_unique<c_minecraft>();
 
-		i = 0;
+		// get world instance
+		auto world = std::make_unique<c_world>(minecraft->get_world());
+
 		Sleep(1);
 	}
 
