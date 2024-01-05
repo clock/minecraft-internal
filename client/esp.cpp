@@ -11,7 +11,7 @@ void esp::run() {
 
 	// print out the viewport
 	for (int i = 0; i < 16; ++i) {
-		std::cout << viewport[i] << std::endl;
+		//std::cout << viewport[i] << std::endl;
 	}
 
 	return;

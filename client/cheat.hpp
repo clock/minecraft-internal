@@ -6,6 +6,12 @@
 
 inline void run_cheat(std::unique_ptr<c_minecraft> minecraft, std::unique_ptr<c_world> world) {
 	
+	if (world.get() == nullptr)
+		return;
+
+	if (minecraft.get() == nullptr)
+		return;
+
 	// get local player as shared_ptr
 	std::shared_ptr<c_entity> local_player = std::make_shared<c_entity>(minecraft->get_local_player());
 	
@@ -15,6 +21,9 @@ inline void run_cheat(std::unique_ptr<c_minecraft> minecraft, std::unique_ptr<c_
 		later i would like to somehow make it so we only loop through the players once
 		that way we can do all the checks in one loop instead of looping through the players every time we want to do a check
 	*/
+
+	if (local_player.get() == nullptr)
+		return;
 
 	// run legitbot
 	Legit::run(local_player.get(), world.get());

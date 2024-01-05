@@ -16,6 +16,9 @@ jclass c_world::get_class() {
 
 std::vector<std::shared_ptr<c_entity>> c_world::get_players() {
 
+	if (this->world_instance == nullptr)
+		return std::vector<std::shared_ptr<c_entity>>();
+
 	static jfieldID player_entities = java_instance->env->GetFieldID(this->get_class(), mappings["world"].fields["player_list"].field_name, mappings["world"].fields["player_list"].field_sig);
 
 	jclass list_cls = java_instance->env->FindClass("java/util/List");

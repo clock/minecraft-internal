@@ -1,3 +1,6 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #define _WINSOCKAPI_
 #include <windows.h>
 #include <iostream>
@@ -27,6 +30,10 @@ void main_thread(void* instance) {
 
 	if (!attached)
 		unload(instance);
+
+	_CrtDumpMemoryLeaks();
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
 
 	// init jvm stuff
 	jsize count;
