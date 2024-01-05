@@ -159,15 +159,17 @@
     <ClInclude Include="hooks.hpp">
       <Filter>source\hooks</Filter>
     </ClInclude>
-    <ClInclude Include="java.hpp">
-      <Filter>source</Filter>
-    </ClInclude>
     <ClInclude Include="legit.hpp">
       <Filter>source\features\combat</Filter>
     </ClInclude>
     <ClInclude Include="mappings.hpp">
       <Filter>source\sdk</Filter>
     </ClInclude>
-    <ClInclude Include="gui.hpp" />
+    <ClInclude Include="gui.hpp">
+      <Filter>source\features\render</Filter>
+    </ClInclude>
+    <ClInclude Include="java.hpp">
+      <Filter>source\sdk</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
