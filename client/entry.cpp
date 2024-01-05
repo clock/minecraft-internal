@@ -1,6 +1,3 @@
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
 #define _WINSOCKAPI_
 #include <windows.h>
 #include <iostream>
