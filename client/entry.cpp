@@ -17,6 +17,11 @@ bool attached = false;
 
 void main_thread(void* instance) {
 
+	_CrtSetBreakAlloc(160);
+	_CrtDumpMemoryLeaks();
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
+
 	// setup console
 	attached = AllocConsole() && SetConsoleTitleW(title);
 	freopen_s(reinterpret_cast<FILE**>stdin, "CONIN$", "r", stdin);
@@ -27,10 +32,6 @@ void main_thread(void* instance) {
 
 	if (!attached)
 		unload(instance);
-
-	_CrtDumpMemoryLeaks();
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
 
 	// init jvm stuff
 	jsize count;
@@ -65,7 +66,6 @@ void main_thread(void* instance) {
 		auto world = std::make_unique<c_world>(minecraft->get_world());
 
 		run_cheat(std::move(minecraft), std::move(world));
-
 		Sleep(1);
 	}
 
