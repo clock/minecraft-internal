@@ -4,12 +4,15 @@
 #include "legit.hpp"
 #include "visuals.hpp"
 
-inline void run_cheat(std::unique_ptr<c_minecraft> minecraft, std::unique_ptr<c_world> world) {
+inline void run_cheat(std::unique_ptr<c_minecraft> minecraft, std::unique_ptr<c_world> world, std::unique_ptr<c_render_manager> render_manager) {
 	
 	if (world.get() == nullptr)
 		return;
 
 	if (minecraft.get() == nullptr)
+		return;
+
+	if (render_manager.get() == nullptr)
 		return;
 
 	// get local player as shared_ptr
@@ -29,7 +32,7 @@ inline void run_cheat(std::unique_ptr<c_minecraft> minecraft, std::unique_ptr<c_
 	//Legit::run(local_player.get(), world.get());
 	
 	// run visuals
-	//visuals::run(local_player.get(), world.get());
+	visuals::run(local_player.get(), world.get(), render_manager.get());
 
 	// run misc
 	// misc::run(local_player, std::move(world));

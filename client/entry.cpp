@@ -65,7 +65,10 @@ void main_thread(void* instance) {
 		// get world instance
 		auto world = std::make_unique<c_world>(minecraft->get_world());
 
-		run_cheat(std::move(minecraft), std::move(world));
+		// get render manager instance
+		auto render_manager = std::make_unique<c_render_manager>(minecraft->get_render_manager());
+
+		run_cheat(std::move(minecraft), std::move(world), std::move(render_manager));
 		Sleep(1);
 	}
 

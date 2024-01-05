@@ -6,7 +6,13 @@ void init_mappings() {
 	/* minecraft class */
 	klass minecraft_class;
 	minecraft_class.class_name = "net.minecraft.client.Minecraft";
+
+	// get minecraft
 	minecraft_class.methods["get_minecraft"] = { "getMinecraft", "()Lnet/minecraft/client/Minecraft;" };
+
+	// get render manager
+	minecraft_class.methods["get_render_manager"] = { "getRenderManager", "()Lnet/minecraft/client/renderer/entity/RenderManager;" };
+
 	minecraft_class.fields["get_player"] = { "thePlayer", "Lnet/minecraft/client/entity/EntityPlayerSP;" };
 	minecraft_class.fields["get_world"] = { "theWorld", "Lnet/minecraft/client/multiplayer/WorldClient;" };
 
@@ -41,14 +47,24 @@ void init_mappings() {
 	klass active_render_info_class;
 	active_render_info_class.class_name = "net.minecraft.client.renderer.ActiveRenderInfo";
 
-	// world to screen fields
+	// matrix
 	active_render_info_class.fields["viewport"] = { "VIEWPORT", "Ljava/nio/IntBuffer;" };
 	active_render_info_class.fields["modelview"] = { "MODELVIEW", "Ljava/nio/FloatBuffer;" };
 	active_render_info_class.fields["projection"] = { "PROJECTION", "Ljava/nio/FloatBuffer;" };
+
+	/* render manager */
+	klass render_manager_class;
+	render_manager_class.class_name = "net.minecraft.client.renderer.entity.RenderManager";
+
+	// render pos
+	render_manager_class.fields["render_posx"] = { "renderPosX", "D" };
+	render_manager_class.fields["render_posy"] = { "renderPosY", "D" };
+	render_manager_class.fields["render_posz"] = { "renderPosZ", "D" };
 
 	// add to mappings map
 	mappings["minecraft"] = minecraft_class;
 	mappings["world"] = world_class;
 	mappings["entity"] = entity_class;
 	mappings["active_render_info"] = active_render_info_class;
+	mappings["render_manager"] = render_manager_class;
 }

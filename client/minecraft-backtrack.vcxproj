@@ -164,7 +164,7 @@
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="legit.cpp" />
     <ClCompile Include="mappings.cpp" />
-    <ClCompile Include="render_manager.cpp" />
+    <ClCompile Include="c_render_manager.cpp" />
     <ClCompile Include="src\buffer.c" />
     <ClCompile Include="src\hde\hde32.c" />
     <ClCompile Include="src\hde\hde64.c" />
@@ -196,7 +196,7 @@
     <ClInclude Include="java.hpp" />
     <ClInclude Include="legit.hpp" />
     <ClInclude Include="mappings.hpp" />
-    <ClInclude Include="render_manager.hpp" />
+    <ClInclude Include="c_render_manager.hpp" />
     <ClInclude Include="src\buffer.h" />
     <ClInclude Include="src\hde\hde32.h" />
     <ClInclude Include="src\hde\hde64.h" />

@@ -37,3 +37,15 @@ c_world c_minecraft::get_world() {
 
 	return c_world(buf);
 }
+
+c_render_manager c_minecraft::get_render_manager() {
+	jobject minecraft_instance = this->get_instance();
+	jclass minecraft_class = this->get_class();
+
+	jmethodID get_render_manager = java_instance->env->GetMethodID(minecraft_class, mappings["minecraft"].methods["get_render_manager"].method_name, mappings["minecraft"].methods["get_render_manager"].method_sig);
+	auto buf = java_instance->env->CallObjectMethod(minecraft_instance, get_render_manager);
+
+	java_instance->env->DeleteLocalRef(minecraft_instance);
+
+	return c_render_manager(buf);
+}

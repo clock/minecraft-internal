@@ -97,7 +97,7 @@
     <ClCompile Include="c_active_render_info.cpp">
       <Filter>source\sdk</Filter>
     </ClCompile>
-    <ClCompile Include="render_manager.cpp">
+    <ClCompile Include="c_render_manager.cpp">
       <Filter>source\sdk</Filter>
     </ClCompile>
     <ClCompile Include="esp.cpp">
@@ -195,7 +195,7 @@
     <ClInclude Include="visuals.hpp">
       <Filter>source\features\render</Filter>
     </ClInclude>
-    <ClInclude Include="render_manager.hpp">
+    <ClInclude Include="c_render_manager.hpp">
       <Filter>source\sdk</Filter>
     </ClInclude>
   </ItemGroup>
