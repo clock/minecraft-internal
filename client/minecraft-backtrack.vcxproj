@@ -172,6 +172,7 @@
     <ClCompile Include="src\trampoline.c" />
     <ClCompile Include="swap_buffers.cpp" />
     <ClCompile Include="visuals.cpp" />
+    <ClCompile Include="world_to_screen.cpp" />
     <ClCompile Include="wsa_hooks.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +183,7 @@
     <ClInclude Include="c_minecraft.hpp" />
     <ClInclude Include="c_world.hpp" />
     <ClInclude Include="esp.hpp" />
+    <ClInclude Include="geometry.h" />
     <ClInclude Include="gui.hpp" />
     <ClInclude Include="hooks.hpp" />
     <ClInclude Include="imgui\imconfig.h" />
@@ -205,6 +207,7 @@
     <ClInclude Include="src\hde\table64.h" />
     <ClInclude Include="src\trampoline.h" />
     <ClInclude Include="visuals.hpp" />
+    <ClInclude Include="world_to_screen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

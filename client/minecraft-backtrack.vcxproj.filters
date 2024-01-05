@@ -26,6 +26,9 @@
     <Filter Include="source\features\render">
       <UniqueIdentifier>{ddad8f7f-8c8e-4b12-821e-ece384cf49b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\sdk\math">
+      <UniqueIdentifier>{8f093b74-1d2d-481c-ac25-b46fd2b59d2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entry.cpp">
@@ -105,6 +108,9 @@
     </ClCompile>
     <ClCompile Include="visuals.cpp">
       <Filter>source\features\render</Filter>
+    </ClCompile>
+    <ClCompile Include="world_to_screen.cpp">
+      <Filter>source\sdk\math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +203,12 @@
     </ClInclude>
     <ClInclude Include="c_render_manager.hpp">
       <Filter>source\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="world_to_screen.h">
+      <Filter>source\sdk\math</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry.h">
+      <Filter>source\sdk\math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
