@@ -23,6 +23,9 @@
     <Filter Include="source\hooks">
       <UniqueIdentifier>{b857a4c1-fe27-4ac3-9597-0b3ea3fff2cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\features\render">
+      <UniqueIdentifier>{ddad8f7f-8c8e-4b12-821e-ece384cf49b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entry.cpp">
@@ -87,6 +90,9 @@
     </ClCompile>
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui.cpp">
+      <Filter>source\features\render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,5 +168,6 @@
     <ClInclude Include="mappings.hpp">
       <Filter>source\sdk</Filter>
     </ClInclude>
+    <ClInclude Include="gui.hpp" />
   </ItemGroup>
 </Project>
