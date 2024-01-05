@@ -94,6 +94,18 @@
     <ClCompile Include="gui.cpp">
       <Filter>source\features\render</Filter>
     </ClCompile>
+    <ClCompile Include="c_active_render_info.cpp">
+      <Filter>source\sdk</Filter>
+    </ClCompile>
+    <ClCompile Include="render_manager.cpp">
+      <Filter>source\sdk</Filter>
+    </ClCompile>
+    <ClCompile Include="esp.cpp">
+      <Filter>source\features\render</Filter>
+    </ClCompile>
+    <ClCompile Include="visuals.cpp">
+      <Filter>source\features\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\buffer.h">
@@ -170,6 +182,19 @@
     </ClInclude>
     <ClInclude Include="java.hpp">
       <Filter>source\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="c_active_render_info.hpp">
+      <Filter>source\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="render_manager.hpp" />
+    <ClInclude Include="common.hpp">
+      <Filter>source\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="esp.hpp">
+      <Filter>source\features\render</Filter>
+    </ClInclude>
+    <ClInclude Include="visuals.hpp">
+      <Filter>source\features\render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

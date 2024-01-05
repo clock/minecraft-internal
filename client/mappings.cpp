@@ -3,19 +3,19 @@
 // 1.8.9 mappings for lunar client
 
 void init_mappings() {
-	// minecraft class
+	/* minecraft class */
 	klass minecraft_class;
 	minecraft_class.class_name = "net.minecraft.client.Minecraft";
 	minecraft_class.methods["get_minecraft"] = { "getMinecraft", "()Lnet/minecraft/client/Minecraft;" };
 	minecraft_class.fields["get_player"] = { "thePlayer", "Lnet/minecraft/client/entity/EntityPlayerSP;" };
 	minecraft_class.fields["get_world"] = { "theWorld", "Lnet/minecraft/client/multiplayer/WorldClient;" };
 
-	// world class
+	/* world class */
 	klass world_class;
 	world_class.class_name = "net.minecraft.world.World";
 	world_class.fields["player_list"] = { "playerEntities", "Ljava/util/List;" };
 
-	// entity class
+	/* entity class */
 	klass entity_class;
 	entity_class.class_name = "net.minecraft.entity.Entity";
 	
@@ -37,8 +37,18 @@ void init_mappings() {
 	// entity name
 	entity_class.methods["name"] = { "getName", "()Ljava/lang/String;" };
 
-	// add to mappings
+	/* active render info */
+	klass active_render_info_class;
+	active_render_info_class.class_name = "net.minecraft.client.renderer.ActiveRenderInfo";
+
+	// world to screen fields
+	active_render_info_class.fields["viewport"] = { "VIEWPORT", "Ljava/nio/IntBuffer;" };
+	active_render_info_class.fields["modelview"] = { "MODELVIEW", "Ljava/nio/FloatBuffer;" };
+	active_render_info_class.fields["projection"] = { "PROJECTION", "Ljava/nio/FloatBuffer;" };
+
+	// add to mappings map
 	mappings["minecraft"] = minecraft_class;
 	mappings["world"] = world_class;
 	mappings["entity"] = entity_class;
+	mappings["active_render_info"] = active_render_info_class;
 }
