@@ -42,7 +42,7 @@ void main_thread(void* instance) {
 	if (java_instance->env == nullptr)
 		unload(instance);
 
-	/*hooks::init();*/
+	hooks::init();
 
 	java_instance->get_loaded_classes();
 
@@ -66,8 +66,8 @@ void main_thread(void* instance) {
 	}
 
 	// sleep, shutdown, sleep, unload
-	/*Sleep(1000);
-	hooks::shutdown();*/
+	Sleep(1000);
+	hooks::shutdown();
 	Sleep(1000);
 	unload(instance);
 }

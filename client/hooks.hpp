@@ -3,6 +3,7 @@
 #include <WinSock2.h>
 
 namespace hooks {
+
 	void init();
 	void shutdown();
 
@@ -51,4 +52,8 @@ namespace hooks {
 
 	inline int(__stdcall* sendOriginal)(
 		SOCKET s, const char* buf, int len, int flags);
+
+	inline bool(__stdcall* wglSwapBuffersOriginal) (HDC hdc);
+
+	bool __stdcall wglSwapBuffersHook(HDC hdc);
 }
