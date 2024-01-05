@@ -1,33 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="minhook">
       <UniqueIdentifier>{1e34dc56-aec6-4b15-b8b4-dc7defc66f42}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\sdk">
+    <Filter Include="imgui">
+      <UniqueIdentifier>{63d95a5e-53b6-4b5b-b66a-f5cacf6d8fb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="source\sdk">
       <UniqueIdentifier>{19547f05-c123-4e95-aa20-aaa61ab813f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\features">
+    <Filter Include="source\features">
       <UniqueIdentifier>{a74372ca-da02-440a-a740-646c6d449992}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\features\combat">
+    <Filter Include="source\features\combat">
       <UniqueIdentifier>{2f47f6a1-4a78-40cc-8fc5-0970b57c2b4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\hooks">
+    <Filter Include="source\hooks">
       <UniqueIdentifier>{b857a4c1-fe27-4ac3-9597-0b3ea3fff2cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entry.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="src\buffer.c">
       <Filter>minhook</Filter>
@@ -45,28 +44,49 @@
       <Filter>minhook</Filter>
     </ClCompile>
     <ClCompile Include="c_minecraft.cpp">
-      <Filter>Source Files\sdk</Filter>
+      <Filter>source\sdk</Filter>
     </ClCompile>
     <ClCompile Include="c_entity.cpp">
-      <Filter>Source Files\sdk</Filter>
+      <Filter>source\sdk</Filter>
     </ClCompile>
     <ClCompile Include="c_world.cpp">
-      <Filter>Source Files\sdk</Filter>
+      <Filter>source\sdk</Filter>
     </ClCompile>
     <ClCompile Include="legit.cpp">
-      <Filter>Source Files\features\combat</Filter>
+      <Filter>source\features\combat</Filter>
     </ClCompile>
     <ClCompile Include="mappings.cpp">
-      <Filter>Source Files\sdk</Filter>
+      <Filter>source\sdk</Filter>
     </ClCompile>
     <ClCompile Include="hooks.cpp">
-      <Filter>Source Files\hooks</Filter>
+      <Filter>source\hooks</Filter>
     </ClCompile>
     <ClCompile Include="wsa_hooks.cpp">
-      <Filter>Source Files\hooks</Filter>
+      <Filter>source\hooks</Filter>
     </ClCompile>
     <ClCompile Include="swap_buffers.cpp">
-      <Filter>Source Files\hooks</Filter>
+      <Filter>source\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_opengl2.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_win32.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_tables.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,32 +114,53 @@
     <ClInclude Include="include\MinHook.h">
       <Filter>minhook</Filter>
     </ClInclude>
-    <ClInclude Include="hooks.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="java.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="mappings.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="imgui\imgui_impl_opengl2.h">
+      <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="c_world.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="imgui\imgui_impl_win32.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_rectpack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_truetype.h">
+      <Filter>imgui</Filter>
     </ClInclude>
     <ClInclude Include="c_entity.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>source\sdk</Filter>
     </ClInclude>
     <ClInclude Include="c_minecraft.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>source\sdk</Filter>
     </ClInclude>
-    <ClInclude Include="legit.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="c_world.hpp">
+      <Filter>source\sdk</Filter>
     </ClInclude>
     <ClInclude Include="cheat.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="render.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="hooks.hpp">
+      <Filter>source\hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="java.hpp">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="legit.hpp">
+      <Filter>source\features\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="mappings.hpp">
+      <Filter>source\sdk</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
