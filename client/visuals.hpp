@@ -5,5 +5,5 @@
 #include "c_render_manager.hpp"
 
 namespace visuals {
-	void run(c_entity* local_player, c_world* world, c_render_manager* render_manager);
+	void run();
 }

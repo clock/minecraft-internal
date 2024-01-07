@@ -12,10 +12,6 @@ int __stdcall hooks::wsasend_hook(
     LPWSAOVERLAPPED lpOverlapped,
     LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine) {
 
-	if (rand() % 100 < 10) {
-		Sleep(rand() % 200 + 10);
-	}
-
 	return hooks::wsasend_original(s, lpBuffers, dwBufferCount, lpNumberOfBytesSent, dwFlags, lpOverlapped, lpCompletionRoutine);
 }
 
@@ -27,10 +23,6 @@ int __stdcall hooks::wsarecv_hook(
 	LPDWORD lpFlags,
 	LPWSAOVERLAPPED lpOverlapped,
 	LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine) {
-
-	while (GetAsyncKeyState(VK_XBUTTON1)) {
-		Sleep(1);
-	}
 
 	return hooks::wsarecv_original(s, lpBuffers, dwBufferCount, lpNumberOfBytesRecvd, lpFlags, lpOverlapped, lpCompletionRoutine);
 }

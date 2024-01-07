@@ -8,7 +8,15 @@
 #include "c_active_render_info.hpp"
 #include "common.hpp"
 #include "c_render_manager.hpp"
+#include "geometry.h"
+
+struct Data {
+	Vector2 pos;
+	std::string value;
+};
 
 namespace esp {
-	void run(c_entity* local_player, c_world* world, c_render_manager* render_manager);
+	inline Data test_point;
+	void update_date();
+	void run();
 }

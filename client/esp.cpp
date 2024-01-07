@@ -1,98 +1,38 @@
 #include "esp.hpp"
 #include <iostream>
 #include "world_to_screen.h"
+#include "globals.hpp"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_win32.h"
+#include "imgui/imgui_impl_opengl2.h"
 
-void esp::run(c_entity* local_player, c_world* world, c_render_manager* render_manager) {
+void esp::run() {
 
-	// make active render info
-	auto active_render_info = c_active_render_info();
-
-	// get the viewport
-	auto viewport = active_render_info.get_viewport();
-
-	// get the projection matrix
-	auto projection_matrix = active_render_info.get_projection_matrix();
-
-	// get the modelview matrix
-	auto modelview_matrix = active_render_info.get_modelview_matrix();
-
-	// render position
-	auto pos_x = render_manager->get_render_posx();
-	auto pos_y = render_manager->get_render_posy();
-	auto pos_z = render_manager->get_render_posz();
-
-	// get list of players
-	auto players = world->get_players();
-
-	//// loop through players
-	//for (auto player : players) {
-
-	//	if (player->get_id() == local_player->get_id())
-	//		continue;
-
-	//	Vector2 screen_pos;
-
-	//	// get player position
-	//	Vector3 player_pos = Vector3(player->get_x(), player->get_y(), player->get_z());
-
-	//	// get player screen position
-	//	if (!c_world_to_screen::world_to_screen(player_pos, screen_pos, modelview_matrix.get(), projection_matrix.get(), viewport.get())) {
-	//		continue;
-	//	}
-
-	//	// get player name
-	//	std::string player_name = player->get_name();
-
-	//	std::cout << player_name << ": " << screen_pos.x << ", " << screen_pos.y << "\n";
-
-	//	break;
-	//}
-
-
-	float closest_dist = 9999;
-	std::shared_ptr<c_entity> closest_player = nullptr;
-
-	for (auto player : players) {
-
-		if (player->get_id() == local_player->get_id())
-			continue;
-
-		if (player->is_valid() == false)
-			continue;
-
-		double x = player->get_x();
-		double y = player->get_y();
-		double z = player->get_z();
-
-		// get distance between local player and player
-		float dist = sqrt(pow(x - local_player->get_x(), 2) + pow(y - local_player->get_y(), 2) + pow(z - local_player->get_z(), 2));
-
-		// if the distance is less than the closest distance
-		if (dist < closest_dist) {
-			// set the closest distance to the distance
-			closest_dist = dist;
-			// set the closest player to the player
-			closest_player = player;
-		}
-
-	}
-
-	if (closest_player == nullptr)
+	if (esp::test_point.value.empty())
 		return;
 
-	Vector2 screen_pos;
-
-	// get player position
-	Vector3 player_pos = Vector3(closest_player->get_x(), closest_player->get_y(), closest_player->get_z());
-
-	// get player screen position
-	c_world_to_screen::world_to_screen(player_pos + Vector3(pos_x, pos_y, pos_z), screen_pos, modelview_matrix.get(), projection_matrix.get(), 1080, 1920);
-
-	// get player name
-	std::string player_name = closest_player->get_name();
-
-	printf("%llf , %llf, %llf\n", pos_x, pos_y, pos_z);
-	std::cout << player_name << ": " << screen_pos.x << ", " << screen_pos.y << "\n";
+	ImGui::GetBackgroundDrawList()->AddText(
+		ImVec2(esp::test_point.pos.x, esp::test_point.pos.y),
+		ImColor(255, 255, 255),
+		esp::test_point.value.c_str()
+	);
 
 	return;
+}
+
+void esp::update_date() {
+	if (!globals::minecraft)
+		return;
+
+	if (!globals::world)
+		return;
+	
+	// get local player
+	auto local_player = std::make_shared<c_entity>(globals::minecraft->get_local_player());
+
+	//if (!local_player)
+		//return;
+
+	esp::test_point.pos = Vector2(10, 10);
+	esp::test_point.value = std::to_string(local_player->get_x());
 }

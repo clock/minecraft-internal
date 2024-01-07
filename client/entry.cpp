@@ -9,6 +9,10 @@
 #include "mappings.hpp"
 #include "c_minecraft.hpp"
 #include "cheat.hpp"
+#include "globals.hpp"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_win32.h"
+#include "imgui/imgui_impl_opengl2.h"
 
 void unload(void* instance, const char* reason = "No reason given.");
 
@@ -17,7 +21,6 @@ bool attached = false;
 
 void main_thread(void* instance) {
 
-	_CrtSetBreakAlloc(160);
 	_CrtDumpMemoryLeaks();
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
@@ -60,15 +63,15 @@ void main_thread(void* instance) {
 		// not quite sure if having these in a loop here will cause a memory leaks, but i don't think so.
 
 		// get minecraft instance
-		auto minecraft = std::make_unique<c_minecraft>();
+		globals::minecraft = std::make_unique<c_minecraft>();
 
 		// get world instance
-		auto world = std::make_unique<c_world>(minecraft->get_world());
+		globals::world = std::make_unique<c_world>(globals::minecraft->get_world());
 
 		// get render manager instance
-		auto render_manager = std::make_unique<c_render_manager>(minecraft->get_render_manager());
+		globals::render_manager = std::make_unique<c_render_manager>(globals::minecraft->get_render_manager());
 
-		run_cheat(std::move(minecraft), std::move(world), std::move(render_manager));
+		run_cheat();
 		Sleep(1);
 	}
 
@@ -84,6 +87,9 @@ void unload(void* instance, const char* reason) {
 	if (java_instance->vm != nullptr)
 		java_instance->vm->DetachCurrentThread();
 	auto console_window = GetConsoleWindow();
+	ImGui_ImplOpenGL2_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
 	FreeConsole();
 	PostMessageA(console_window, WM_QUIT, 0, 0);
 	FreeLibraryAndExitThread((HMODULE)instance, 0);
