@@ -4,56 +4,60 @@
 
 namespace hooks {
 
-	void init();
-	void shutdown();
+    typedef LRESULT(CALLBACK* template_wnd_proc) (HWND, UINT, WPARAM, LPARAM);
+    inline template_wnd_proc original_wnd_proc;
+    LRESULT CALLBACK hook_wnd_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-	inline int(__stdcall* WSASendOriginal)(
-		SOCKET s,
-		LPWSABUF lpBuffers,
-		DWORD dwBufferCount,
-		LPDWORD lpNumberOfBytesSent,
-		DWORD dwFlags,
-		LPWSAOVERLAPPED lpOverlapped,
-		LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
+    void init();
+    void shutdown();
 
-	int __stdcall WSASendHook(
-		SOCKET s,
-		LPWSABUF lpBuffers,
-		DWORD dwBufferCount,
-		LPDWORD lpNumberOfBytesSent,
-		DWORD dwFlags,
-		LPWSAOVERLAPPED lpOverlapped,
-		LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
+    inline int(__stdcall* wsasend_original)(
+        SOCKET s,
+        LPWSABUF lp_buffers,
+        DWORD dw_buffer_count,
+        LPDWORD lp_number_of_bytes_sent,
+        DWORD dw_flags,
+        LPWSAOVERLAPPED lp_overlapped,
+        LPWSAOVERLAPPED_COMPLETION_ROUTINE lp_completion_routine);
 
-	inline int(__stdcall* WSARecvOriginal)(
-		SOCKET s,
-		LPWSABUF lpBuffers,
-		DWORD dwBufferCount,
-		LPDWORD lpNumberOfBytesRecvd,
-		LPDWORD lpFlags,
-		LPWSAOVERLAPPED lpOverlapped,
-		LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
+    int __stdcall wsasend_hook(
+        SOCKET s,
+        LPWSABUF lp_buffers,
+        DWORD dw_buffer_count,
+        LPDWORD lp_number_of_bytes_sent,
+        DWORD dw_flags,
+        LPWSAOVERLAPPED lp_overlapped,
+        LPWSAOVERLAPPED_COMPLETION_ROUTINE lp_completion_routine);
 
-	int __stdcall WSARecvHook(
-		SOCKET s,
-		LPWSABUF lpBuffers,
-		DWORD dwBufferCount,
-		LPDWORD lpNumberOfBytesRecvd,
-		LPDWORD lpFlags,
-		LPWSAOVERLAPPED lpOverlapped,
-		LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
+    inline int(__stdcall* wsarecv_original)(
+        SOCKET s,
+        LPWSABUF lp_buffers,
+        DWORD dw_buffer_count,
+        LPDWORD lp_number_of_bytes_recvd,
+        LPDWORD lp_flags,
+        LPWSAOVERLAPPED lp_overlapped,
+        LPWSAOVERLAPPED_COMPLETION_ROUTINE lp_completion_routine);
 
-	int __stdcall recvHook(SOCKET s, char* buf, int len, int flags);
+    int __stdcall wsarecv_hook(
+        SOCKET s,
+        LPWSABUF lp_buffers,
+        DWORD dw_buffer_count,
+        LPDWORD lp_number_of_bytes_recvd,
+        LPDWORD lp_flags,
+        LPWSAOVERLAPPED lp_overlapped,
+        LPWSAOVERLAPPED_COMPLETION_ROUTINE lp_completion_routine);
 
-	inline int(__stdcall* recvOriginal)(
-		SOCKET s, char* buf, int len, int flags);
+    int __stdcall recv_hook(SOCKET s, char* buf, int len, int flags);
 
-	int __stdcall sendHook(SOCKET s, const char* buf, int len, int flags);
+    inline int(__stdcall* recv_original)(
+        SOCKET s, char* buf, int len, int flags);
 
-	inline int(__stdcall* sendOriginal)(
-		SOCKET s, const char* buf, int len, int flags);
+    int __stdcall send_hook(SOCKET s, const char* buf, int len, int flags);
 
-	inline bool(__stdcall* wglSwapBuffersOriginal) (HDC hdc);
+    inline int(__stdcall* send_original)(
+        SOCKET s, const char* buf, int len, int flags);
 
-	bool __stdcall wglSwapBuffersHook(HDC hdc);
+    inline bool(__stdcall* wgl_swap_buffers_original) (HDC hdc);
+
+    bool __stdcall wgl_swap_buffers_hook(HDC hdc);
 }

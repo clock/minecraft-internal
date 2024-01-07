@@ -1,7 +1,13 @@
 #include "legit.hpp"
+#include <iostream>
+#include <Windows.h>
 
 void Legit::run(c_entity* local_player, c_world* world) {
-	
+
+	if (local_player == nullptr)
+		return;
+
+	/*
 	auto players = world->get_players();
 
 	float closest_dist = 9999;
@@ -36,4 +42,6 @@ void Legit::run(c_entity* local_player, c_world* world) {
 		return;
 
 	//printf("closest player: %s %f\\%f\\%f\n", closest_player->get_name().c_str(), closest_player->get_x(), closest_player->get_y(), closest_player->get_z());
+	*/
+
 }

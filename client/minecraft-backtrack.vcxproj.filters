@@ -29,6 +29,9 @@
     <Filter Include="source\sdk\math">
       <UniqueIdentifier>{8f093b74-1d2d-481c-ac25-b46fd2b59d2e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\cheat">
+      <UniqueIdentifier>{90a4b20c-3c9d-4241-a70a-2adc5fab7dc1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entry.cpp">
@@ -112,6 +115,9 @@
     <ClCompile Include="world_to_screen.cpp">
       <Filter>source\sdk\math</Filter>
     </ClCompile>
+    <ClCompile Include="wndproc.cpp">
+      <Filter>source\hooks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\buffer.h">
@@ -171,9 +177,6 @@
     <ClInclude Include="c_world.hpp">
       <Filter>source\sdk</Filter>
     </ClInclude>
-    <ClInclude Include="cheat.hpp">
-      <Filter>source</Filter>
-    </ClInclude>
     <ClInclude Include="hooks.hpp">
       <Filter>source\hooks</Filter>
     </ClInclude>
@@ -209,6 +212,12 @@
     </ClInclude>
     <ClInclude Include="geometry.h">
       <Filter>source\sdk\math</Filter>
+    </ClInclude>
+    <ClInclude Include="cheat.hpp">
+      <Filter>source\cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.hpp">
+      <Filter>source\cheat</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

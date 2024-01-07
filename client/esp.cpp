@@ -17,9 +17,9 @@ void esp::run(c_entity* local_player, c_world* world, c_render_manager* render_m
 	auto modelview_matrix = active_render_info.get_modelview_matrix();
 
 	// render position
-	float pos_x = (float)render_manager->get_render_posx();
-	float pos_y = (float)render_manager->get_render_posy();
-	float pos_z = (float)render_manager->get_render_posz();
+	auto pos_x = render_manager->get_render_posx();
+	auto pos_y = render_manager->get_render_posy();
+	auto pos_z = render_manager->get_render_posz();
 
 	// get list of players
 	auto players = world->get_players();
@@ -86,11 +86,12 @@ void esp::run(c_entity* local_player, c_world* world, c_render_manager* render_m
 	Vector3 player_pos = Vector3(closest_player->get_x(), closest_player->get_y(), closest_player->get_z());
 
 	// get player screen position
-	c_world_to_screen::world_to_screen(player_pos, screen_pos, modelview_matrix.get(), projection_matrix.get(), viewport.get());
+	c_world_to_screen::world_to_screen(player_pos + Vector3(pos_x, pos_y, pos_z), screen_pos, modelview_matrix.get(), projection_matrix.get(), 1080, 1920);
 
 	// get player name
 	std::string player_name = closest_player->get_name();
 
+	printf("%llf , %llf, %llf\n", pos_x, pos_y, pos_z);
 	std::cout << player_name << ": " << screen_pos.x << ", " << screen_pos.y << "\n";
 
 	return;

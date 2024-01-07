@@ -25,6 +25,20 @@ void init_mappings() {
 	klass entity_class;
 	entity_class.class_name = "net.minecraft.entity.Entity";
 	
+	// hurt time
+	entity_class.fields["hurt_time"] = { "hurtResistantTime", "I" };
+
+	// invulnerable
+	entity_class.fields["invulnerable"] = { "invulnerable", "Z" };
+
+	// velocity changed
+	entity_class.fields["velocity_changed"] = { "velocityChanged", "Z" };
+
+	// motion x, y, z
+	entity_class.fields["motion_x"] = { "motionX", "D" };
+	entity_class.fields["motion_y"] = { "motionY", "D" };
+	entity_class.fields["motion_z"] = { "motionZ", "D" };
+
 	// x, y, z
 	entity_class.fields["x"] = { "posX", "D" };
 	entity_class.fields["y"] = { "posY", "D" };

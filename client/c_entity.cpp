@@ -87,3 +87,39 @@ std::string c_entity::get_name() {
 
 	return name;
 }
+
+int c_entity::get_hurt_time_resistant() {
+	jclass entity_class = get_class();
+
+	jfieldID hurt_time = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["hurt_time"].field_name, mappings["entity"].fields["hurt_time"].field_sig);
+	auto buf = java_instance->env->GetIntField(this->player_instance, hurt_time);
+
+	return buf;
+}
+
+bool c_entity::is_invulnerable() {
+	jclass entity_class = get_class();
+
+	jfieldID invulnerable = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["invulnerable"].field_name, mappings["entity"].fields["invulnerable"].field_sig);
+	auto buf = java_instance->env->GetBooleanField(this->player_instance, invulnerable);
+
+	return buf;
+}
+
+bool c_entity::is_velocity_changed() {
+	jclass entity_class = get_class();
+
+	jfieldID velocity_changed = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["velocity_changed"].field_name, mappings["entity"].fields["velocity_changed"].field_sig);
+	auto buf = java_instance->env->GetBooleanField(this->player_instance, velocity_changed);
+
+	return buf;
+}
+
+double c_entity::get_motion_x() {
+	jclass entity_class = get_class();
+
+	jfieldID motion_x = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["motion_x"].field_name, mappings["entity"].fields["motion_x"].field_sig);
+	auto buf = java_instance->env->GetDoubleField(this->player_instance, motion_x);
+
+	return buf;
+}

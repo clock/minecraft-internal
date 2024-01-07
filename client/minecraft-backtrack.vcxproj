@@ -172,6 +172,7 @@
     <ClCompile Include="src\trampoline.c" />
     <ClCompile Include="swap_buffers.cpp" />
     <ClCompile Include="visuals.cpp" />
+    <ClCompile Include="wndproc.cpp" />
     <ClCompile Include="world_to_screen.cpp" />
     <ClCompile Include="wsa_hooks.cpp" />
   </ItemGroup>
@@ -184,6 +185,7 @@
     <ClInclude Include="c_world.hpp" />
     <ClInclude Include="esp.hpp" />
     <ClInclude Include="geometry.h" />
+    <ClInclude Include="globals.hpp" />
     <ClInclude Include="gui.hpp" />
     <ClInclude Include="hooks.hpp" />
     <ClInclude Include="imgui\imconfig.h" />

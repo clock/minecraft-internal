@@ -12,6 +12,10 @@ public:
 	int get_id();
 	bool is_valid();
 	bool is_dead();
+	int get_hurt_time_resistant();
+	bool is_invulnerable();
+	bool is_velocity_changed();
+	double get_motion_x();
 	std::string get_name();
 
 	void cleanup();

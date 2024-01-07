@@ -29,11 +29,11 @@ inline void run_cheat(std::unique_ptr<c_minecraft> minecraft, std::unique_ptr<c_
 		return;
 
 	// run legitbot
-	//Legit::run(local_player.get(), world.get());
+	Legit::run(local_player.get(), world.get());
 	
 	// run visuals
-	visuals::run(local_player.get(), world.get(), render_manager.get());
+	//visuals::run(local_player.get(), world.get(), render_manager.get());
 
 	// run misc
-	// misc::run(local_player, std::move(world));
+	//misc::run(local_player, std::move(world));
 }

@@ -47,9 +47,9 @@ void main_thread(void* instance) {
 	if (java_instance->env == nullptr)
 		unload(instance);
 
-	hooks::init();
-
 	java_instance->get_loaded_classes();
+	
+	hooks::init();
 
 	// init mappings
 	init_mappings(); // in the end we will have a server that sends us the mappings for different version support.

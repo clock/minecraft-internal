@@ -11,7 +11,7 @@ Vector4 c_world_to_screen::multiply(Vector4 vec, GLfloat mat[16])
 	);
 }
 
-bool c_world_to_screen::world_to_screen(Vector3 point_in_world, Vector2& screen, GLfloat modelview[16], GLfloat projection[16], GLint viewport[16])
+bool c_world_to_screen::world_to_screen(Vector3 point_in_world, Vector2& screen, GLfloat modelview[16], GLfloat projection[16], int screen_height, int screen_width)
 {
 	Vector4 clip_space_pos = multiply(multiply(Vector4(point_in_world.x, point_in_world.y, point_in_world.z, 1.0f), modelview), projection);
 
@@ -23,7 +23,7 @@ bool c_world_to_screen::world_to_screen(Vector3 point_in_world, Vector2& screen,
 		return false;
 	}
 
-	screen.x = ((ndc_space_pos.x + 1.0f) / 2.0f) * viewport[2];
-	screen.y = ((1.0f - ndc_space_pos.y) / 2.0f) * viewport[3];
+	screen.x = ((ndc_space_pos.x + 1.0f) / 2.0f) * screen_width;
+	screen.y = ((1.0f - ndc_space_pos.y) / 2.0f) * screen_height;
 	return true;
 }
