@@ -6,8 +6,8 @@
 #include "imgui/imgui_impl_win32.h"
 #include "imgui/imgui_impl_opengl2.h"
 
-void esp::run() {
-
+void esp::draw() {
+	/*
 	if (esp::test_point.value.empty())
 		return;
 
@@ -16,23 +16,14 @@ void esp::run() {
 		ImColor(255, 255, 255),
 		esp::test_point.value.c_str()
 	);
-
+	*/
 	return;
 }
 
-void esp::update_date() {
-	if (!globals::minecraft)
+void esp::update_data() {
+	if (globals::minecraft == nullptr)
 		return;
 
-	if (!globals::world)
+	if (globals::world == nullptr)
 		return;
-	
-	// get local player
-	auto local_player = std::make_shared<c_entity>(globals::minecraft->get_local_player());
-
-	//if (!local_player)
-		//return;
-
-	esp::test_point.pos = Vector2(10, 10);
-	esp::test_point.value = std::to_string(local_player->get_x());
 }

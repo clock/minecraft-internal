@@ -25,7 +25,7 @@ void Legit::run(c_entity* local_player, c_world* world) {
 		double z = player->get_z();
 
 		// get distance between local player and player
-		float dist = sqrt(pow(x - local_player->get_x(), 2) + pow(y - local_player->get_y(), 2) + pow(z - local_player->get_z(), 2));
+		double dist = sqrt(pow(x - local_player->get_x(), 2) + pow(y - local_player->get_y(), 2) + pow(z - local_player->get_z(), 2));
 
 		// if the distance is less than the closest distance
 		if (dist < closest_dist) {

@@ -10,13 +10,13 @@
 #include "c_render_manager.hpp"
 #include "geometry.h"
 
-struct Data {
+struct esp_data {
 	Vector2 pos;
 	std::string value;
 };
 
 namespace esp {
-	inline Data test_point;
-	void update_date();
-	void run();
+	inline esp_data test_point;
+	void update_data();
+	void draw();
 }

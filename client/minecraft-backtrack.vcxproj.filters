@@ -32,6 +32,12 @@
     <Filter Include="source\cheat">
       <UniqueIdentifier>{90a4b20c-3c9d-4241-a70a-2adc5fab7dc1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\features\misc">
+      <UniqueIdentifier>{942c8194-22d1-46e7-842d-2fe960c43b50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\features\gui">
+      <UniqueIdentifier>{247001bd-5af7-419a-8afc-5522924461e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entry.cpp">
@@ -97,9 +103,6 @@
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="gui.cpp">
-      <Filter>source\features\render</Filter>
-    </ClCompile>
     <ClCompile Include="c_active_render_info.cpp">
       <Filter>source\sdk</Filter>
     </ClCompile>
@@ -109,14 +112,17 @@
     <ClCompile Include="esp.cpp">
       <Filter>source\features\render</Filter>
     </ClCompile>
-    <ClCompile Include="visuals.cpp">
-      <Filter>source\features\render</Filter>
-    </ClCompile>
     <ClCompile Include="world_to_screen.cpp">
       <Filter>source\sdk\math</Filter>
     </ClCompile>
     <ClCompile Include="wndproc.cpp">
       <Filter>source\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="misc.cpp">
+      <Filter>source\features\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="gui.cpp">
+      <Filter>source\features\gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,9 +192,6 @@
     <ClInclude Include="mappings.hpp">
       <Filter>source\sdk</Filter>
     </ClInclude>
-    <ClInclude Include="gui.hpp">
-      <Filter>source\features\render</Filter>
-    </ClInclude>
     <ClInclude Include="java.hpp">
       <Filter>source\sdk</Filter>
     </ClInclude>
@@ -199,9 +202,6 @@
       <Filter>source\sdk</Filter>
     </ClInclude>
     <ClInclude Include="esp.hpp">
-      <Filter>source\features\render</Filter>
-    </ClInclude>
-    <ClInclude Include="visuals.hpp">
       <Filter>source\features\render</Filter>
     </ClInclude>
     <ClInclude Include="c_render_manager.hpp">
@@ -218,6 +218,12 @@
     </ClInclude>
     <ClInclude Include="globals.hpp">
       <Filter>source\cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="misc.hpp">
+      <Filter>source\features\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="gui.hpp">
+      <Filter>source\features\gui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

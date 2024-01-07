@@ -2,8 +2,9 @@
 #include "c_minecraft.hpp"
 #include "c_world.hpp"
 #include "legit.hpp"
-#include "visuals.hpp"
 #include "globals.hpp"
+#include "esp.hpp"
+#include "misc.hpp"
 
 inline void run_cheat() {
 	
@@ -33,8 +34,8 @@ inline void run_cheat() {
 	//Legit::run(local_player.get(), globals::world.get());
 	
 	// run visuals
-	visuals::run();
+	esp::update_data();
 
 	// run misc
-	//misc::run(local_player, std::move(world));
+	misc::update_data();
 }

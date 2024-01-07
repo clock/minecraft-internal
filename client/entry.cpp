@@ -10,9 +10,7 @@
 #include "c_minecraft.hpp"
 #include "cheat.hpp"
 #include "globals.hpp"
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_win32.h"
-#include "imgui/imgui_impl_opengl2.h"
+#include "gui.hpp"
 
 void unload(void* instance, const char* reason = "No reason given.");
 
@@ -86,10 +84,8 @@ void unload(void* instance, const char* reason) {
 	printf("Unloading: %s\n", reason);
 	if (java_instance->vm != nullptr)
 		java_instance->vm->DetachCurrentThread();
+	gui::shutdown();
 	auto console_window = GetConsoleWindow();
-	ImGui_ImplOpenGL2_Shutdown();
-	ImGui_ImplWin32_Shutdown();
-	ImGui::DestroyContext();
 	FreeConsole();
 	PostMessageA(console_window, WM_QUIT, 0, 0);
 	FreeLibraryAndExitThread((HMODULE)instance, 0);
