@@ -43,7 +43,7 @@ Matrix c_active_render_info::get_modelview_matrix() {
 	m.m33 = arr[15];
 
 	//java_instance->env->DeleteLocalRef(float_buffer); might have to delete this not sure, i doubt it since its a class but we'll see
-	//java_instance->env->DeleteLocalRef(modelview_obj);
+	java_instance->env->DeleteLocalRef(modelview_obj);
 
 	return m;
 }
@@ -78,7 +78,7 @@ Matrix c_active_render_info::get_projection_matrix() {
 	m.m32 = arr[14];
 	m.m33 = arr[15];
 	//java_instance->env->DeleteLocalRef(float_buffer); might have to delete this not sure, i doubt it since its a class but we'll see
-	//java_instance->env->DeleteLocalRef(projection_obj);
+	java_instance->env->DeleteLocalRef(projection_obj);
 
 	return m;
 }

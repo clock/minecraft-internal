@@ -10,13 +10,23 @@
 #include "geometry.h"
 #include <vector>
 
+struct box_t {
+	int x, y, w, h;
+};
+
 struct esp_data {
-	Vector2 pos;
+	box_t box = {};
 	std::string value;
 };
 
 namespace esp {
+
+	// put in config
+	const int max_distance = 35;
+
 	inline std::vector<esp_data> test_point;
 	void update_data();
+	bool compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity> local_player, c_active_render_info render_info, box_t& box);
+	void box(box_t box);
 	void draw();
 }
