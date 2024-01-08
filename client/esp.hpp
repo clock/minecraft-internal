@@ -16,7 +16,9 @@ struct box_t {
 
 struct esp_data {
 	box_t box = {};
-	std::string value;
+	std::string name;
+	int health;
+	int max_health;
 };
 
 namespace esp {
@@ -27,6 +29,8 @@ namespace esp {
 	inline std::vector<esp_data> test_point;
 	void update_data();
 	bool compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity> local_player, c_active_render_info render_info, box_t& box);
-	void box(box_t box);
+	void box(esp_data data);
+	void health(esp_data data);
+	void name(esp_data data);
 	void draw();
 }

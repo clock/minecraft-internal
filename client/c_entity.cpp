@@ -132,3 +132,21 @@ bool c_entity::is_sneaking() {
 
 	return buf;
 }
+
+int c_entity::get_health() {
+	jclass living_base_class = java_instance->get_class(mappings["entity_living_base"].class_name);
+
+	jmethodID get_health = java_instance->env->GetMethodID(living_base_class, mappings["entity_living_base"].methods["health"].method_name, mappings["entity_living_base"].methods["health"].method_sig);
+	auto buf = java_instance->env->CallFloatMethod(this->player_instance, get_health);
+
+	return buf;
+}
+
+int c_entity::get_max_health() {
+	jclass living_base_class = java_instance->get_class(mappings["entity_living_base"].class_name);
+
+	jmethodID get_max_health = java_instance->env->GetMethodID(living_base_class, mappings["entity_living_base"].methods["max_health"].method_name, mappings["entity_living_base"].methods["max_health"].method_sig);
+	auto buf = java_instance->env->CallFloatMethod(this->player_instance, get_max_health);
+
+	return buf;
+}

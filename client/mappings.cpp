@@ -78,10 +78,19 @@ void init_mappings() {
 	render_manager_class.fields["render_posy"] = { "renderPosY", "D" };
 	render_manager_class.fields["render_posz"] = { "renderPosZ", "D" };
 
+	/* entity living base */
+	klass entity_living_base_class;
+	entity_living_base_class.class_name = "net.minecraft.entity.EntityLivingBase";
+
+	// health
+	entity_living_base_class.methods["health"] = { "getHealth", "()F" };
+	entity_living_base_class.methods["max_health"] = { "getMaxHealth", "()F" };
+
 	// add to mappings map
 	mappings["minecraft"] = minecraft_class;
 	mappings["world"] = world_class;
 	mappings["entity"] = entity_class;
 	mappings["active_render_info"] = active_render_info_class;
 	mappings["render_manager"] = render_manager_class;
+	mappings["entity_living_base"] = entity_living_base_class;
 }

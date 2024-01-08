@@ -5,6 +5,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_win32.h"
 #include "imgui/imgui_impl_opengl2.h"
+#include <algorithm>
 
 void esp::draw() {
 	
@@ -17,39 +18,94 @@ void esp::draw() {
 	if (globals::render_manager == nullptr)
 		return;
 
-	for (auto player : esp::test_point) {
+	for (auto data : esp::test_point) {
 
-		esp::box(player.box);
+		esp::box(data);
+		esp::name(data);
+		esp::health(data);
 
 	}
 	
 	return;
 }
 
-void esp::box(box_t box) {
+void esp::name(esp_data data) {
 	
-	if (globals::minecraft == nullptr)
-		return;
+	std::string name = data.name;
 
-	if (globals::world == nullptr)
-		return;
+	// truncate name if too long (old ayyware crasher meme)
+	if (name.length() > 16)
+		name = name.substr(0, 16) + "...";
 
-	if (globals::render_manager == nullptr)
-		return;
+	ImGui::GetBackgroundDrawList()->AddText(
+		ImVec2(data.box.x + data.box.w / 2 - ImGui::CalcTextSize(name.c_str()).x / 2, data.box.y - ImGui::CalcTextSize(name.c_str()).y - 1),
+		ImColor(255, 255, 255),
+		name.c_str()
+	);
 
+}
+
+void esp::box(esp_data data) {
+	
 	ImGui::GetBackgroundDrawList()->AddRect(
-		ImVec2(box.x, box.y),
-		ImVec2(box.x + box.w, box.y + box.h),
+		ImVec2(data.box.x, data.box.y),
+		ImVec2(data.box.x + data.box.w, data.box.y + data.box.h),
 		ImColor(255, 255, 255)
 	);
 
 	// cool outer online only
 	ImGui::GetBackgroundDrawList()->AddRect(
-		ImVec2(box.x - 1, box.y - 1),
-		ImVec2(box.x + box.w + 1, box.y + box.h + 1),
+		ImVec2(data.box.x - 1, data.box.y - 1),
+		ImVec2(data.box.x + data.box.w + 1, data.box.y + data.box.h + 1),
 		ImColor(0, 0, 0, 180)
 	);
 
+}
+
+void esp::health(esp_data data) {
+
+	// health bar will be green if health is near max (or max) and red if health is low
+	const float health_percentage = (float)data.health / (float)data.max_health;
+
+	// calculate the color
+	ImColor health_color = ImColor(
+		0,
+		255,
+		0
+	);
+
+	// lerp lambda
+	auto lerp = [](float a, float b, float f) -> float {
+		return a + f * (b - a);
+	};
+
+	// lerp the color
+	health_color.Value.x = lerp(255, 0, health_percentage);
+	health_color.Value.y = lerp(0, 255, health_percentage);
+
+	int bar_size = 0;
+	if (data.max_health > 0)
+		bar_size = std::clamp(int(data.health * data.box.h) / data.max_health, 0, data.box.h);
+	else
+		bar_size = 0;
+
+	ImGui::GetBackgroundDrawList()->AddRect(
+		ImVec2(data.box.x - 6, data.box.y - 1),
+		ImVec2(data.box.x - 2, data.box.y + data.box.h + 1),
+		ImColor(0, 0, 0, 180)
+	);
+
+	ImGui::GetBackgroundDrawList()->AddRectFilled(
+		ImVec2(data.box.x - 5, data.box.y),
+		ImVec2(data.box.x - 3, data.box.y + data.box.h),
+		ImColor(0, 0, 0, 65)
+	);
+
+	ImGui::GetBackgroundDrawList()->AddRectFilled(
+		ImVec2(data.box.x - 5, data.box.y + (data.box.h - bar_size)),
+		ImVec2(data.box.x - 3, data.box.y + data.box.h),
+		health_color
+	);
 }
 
 void esp::update_data() {
@@ -89,9 +145,13 @@ void esp::update_data() {
 
 		esp_data data;
 		box_t box;
-		esp::compute_box(player, local_player, render_info, box);
-		data.value = player_name;
+		if (!esp::compute_box(player, local_player, render_info, box))
+			continue;
+
+		data.name = player_name;
 		data.box = box;
+		data.health = player->get_health();
+		data.max_health = player->get_max_health();
 
 		point_buffer.push_back(data);
 	}
