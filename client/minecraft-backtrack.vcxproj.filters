@@ -198,9 +198,6 @@
     <ClInclude Include="c_active_render_info.hpp">
       <Filter>source\sdk</Filter>
     </ClInclude>
-    <ClInclude Include="common.hpp">
-      <Filter>source\sdk</Filter>
-    </ClInclude>
     <ClInclude Include="esp.hpp">
       <Filter>source\features\render</Filter>
     </ClInclude>

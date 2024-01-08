@@ -8,6 +8,7 @@
 #include <Windows.h>
 
 struct watermark_data {
+	bool display = false;
 	std::string value = "cheat_name";
 	ImColor color = ImColor(255, 255, 255);
 };

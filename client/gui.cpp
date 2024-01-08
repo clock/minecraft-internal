@@ -3,6 +3,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_win32.h"
 #include "imgui/imgui_impl_opengl2.h"
+#include "globals.hpp"
 
 void gui::draw() {
     ImGui::SetNextWindowSize({ 300, 200 }, ImGuiCond_Once);
@@ -14,6 +15,7 @@ void gui::draw() {
 }
 
 void gui::init(HDC hdc) {
+
     auto context = ImGui::CreateContext();
     ImGui::SetCurrentContext(context);
 
@@ -23,6 +25,8 @@ void gui::init(HDC hdc) {
     auto& io = ImGui::GetIO();
     io.IniFilename = nullptr;
     io.LogFilename = nullptr;
+
+    globals::imgui_init = true;
 }
 
 void gui::shutdown() {

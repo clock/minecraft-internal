@@ -14,6 +14,9 @@ void misc::draw() {
 	if (globals::world == nullptr)
 		return;
 
+    if (!misc::watermark.display)
+		return;
+
 	ImGui::GetBackgroundDrawList()->AddText(
 		ImVec2(1, 1),
 		misc::watermark.color,
@@ -28,8 +31,21 @@ void misc::draw() {
 }
 
 void misc::update_data() {
-    if (globals::minecraft == nullptr || globals::world == nullptr)
+
+    if (globals::minecraft == nullptr || globals::world == nullptr) {
+        misc::watermark.display = false;
         return;
+    }
+
+    std::shared_ptr<c_entity> local_player = std::make_shared<c_entity>(globals::minecraft->get_local_player());
+
+    // i only wanna display it in game
+    if (local_player == nullptr || !local_player.get() || !local_player || !local_player->is_valid()) {
+        misc::watermark.display = false;
+        return;
+    }
+
+    misc::watermark.display = true;
 
     static auto last_time_check = std::chrono::high_resolution_clock::now();
     static float timer = 25.0f;

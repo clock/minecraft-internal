@@ -6,6 +6,6 @@
 class c_world_to_screen
 {
 public:
-	static Vector4 multiply(Vector4 vec, GLfloat mat[16]);
-	static bool world_to_screen(Vector3 point_in_world, Vector2& screen, GLfloat modelview[16], GLfloat projection[16], int screen_height, int screen_width);
+	static Vector4 multiply(Vector4 v, Matrix m);
+	static bool world_to_screen(Vector3 point, Matrix modelView, Matrix projection, int screenWidth, int screenHeight, Vector2& screenPos);
 };

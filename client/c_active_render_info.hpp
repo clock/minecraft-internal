@@ -3,6 +3,7 @@
 #include "java.hpp"
 #include <Windows.h>
 #include <gl/GL.h>
+#include "geometry.h"
 
 class c_active_render_info {
 public:
@@ -11,6 +12,6 @@ public:
 	void cleanup();
 
 	std::unique_ptr<GLint[]> get_viewport();
-	std::unique_ptr<GLfloat[]> get_modelview_matrix();
-	std::unique_ptr<GLfloat[]> get_projection_matrix();
+	Matrix get_modelview_matrix();
+	Matrix get_projection_matrix();
 };

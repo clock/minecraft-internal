@@ -58,6 +58,9 @@ void main_thread(void* instance) {
 	// keeping the thread alive
 	while (!GetAsyncKeyState(VK_END)) {
 
+		if (!globals::imgui_init)
+			continue;
+
 		// not quite sure if having these in a loop here will cause a memory leaks, but i don't think so.
 
 		// get minecraft instance

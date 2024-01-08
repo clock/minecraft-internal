@@ -1,29 +1,42 @@
 #include "world_to_screen.h"
 #include <limits>
 
-Vector4 c_world_to_screen::multiply(Vector4 vec, GLfloat mat[16])
+Vector4 c_world_to_screen::multiply(Vector4 v, Matrix m)
 {
-	return Vector4(
-		vec.x * mat[0] + vec.y * mat[4] + vec.z * mat[8] + vec.w * mat[12],
-		vec.x * mat[1] + vec.y * mat[5] + vec.z * mat[9] + vec.w * mat[13],
-		vec.x * mat[2] + vec.y * mat[6] + vec.z * mat[10] + vec.w * mat[14],
-		vec.x * mat[3] + vec.y * mat[7] + vec.z * mat[11] + vec.w * mat[15]
-	);
+	return Vector4{
+		v.x * m.m00 + v.y * m.m10 + v.z * m.m20 + v.w * m.m30,
+		v.x * m.m01 + v.y * m.m11 + v.z * m.m21 + v.w * m.m31,
+		v.x * m.m02 + v.y * m.m12 + v.z * m.m22 + v.w * m.m32,
+		v.x * m.m03 + v.y * m.m13 + v.z * m.m23 + v.w * m.m33
+	};
 }
 
-bool c_world_to_screen::world_to_screen(Vector3 point_in_world, Vector2& screen, GLfloat modelview[16], GLfloat projection[16], int screen_height, int screen_width)
-{
-	Vector4 clip_space_pos = multiply(multiply(Vector4(point_in_world.x, point_in_world.y, point_in_world.z, 1.0f), modelview), projection);
+bool c_world_to_screen::world_to_screen(Vector3 point, Matrix modelView, Matrix projection, int screenWidth, int screenHeight, Vector2& screenPos)
+{// csp = Clip Space Position
+	Vector4 csp = multiply(
+		multiply(
+			Vector4{ point.x, point.y, point.z, 1.0f },
+			modelView
+		),
+		projection
+	);
 
-	Vector3 ndc_space_pos = Vector3(clip_space_pos.x / clip_space_pos.w, clip_space_pos.y / clip_space_pos.w, clip_space_pos.z / clip_space_pos.w);
+	// ndc = Native Device Coordinate
+	Vector3 ndc{
+		csp.x / csp.w,
+		csp.y / csp.w,
+		csp.z / csp.w
+	};
 
-	// nPlane = -1, fPlane = 1
-	if (ndc_space_pos.z < -1.0 || ndc_space_pos.z > 1.0)
-	{
-		return false;
+	//Logger::Log("NDC.Z: " + std::to_string(ndc.z));
+
+	if (ndc.z > 1 && ndc.z < 1.15) {
+		screenPos = Vector2{
+			((ndc.x + 1.0f) / 2.0f) * screenWidth,
+			((1.0f - ndc.y) / 2.0f) * screenHeight,
+		};
+		return true;
 	}
 
-	screen.x = ((ndc_space_pos.x + 1.0f) / 2.0f) * screen_width;
-	screen.y = ((1.0f - ndc_space_pos.y) / 2.0f) * screen_height;
-	return true;
+	return false;
 }

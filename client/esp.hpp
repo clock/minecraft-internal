@@ -6,7 +6,6 @@
 #include "c_entity.hpp"
 #include "c_world.hpp"
 #include "c_active_render_info.hpp"
-#include "common.hpp"
 #include "c_render_manager.hpp"
 #include "geometry.h"
 

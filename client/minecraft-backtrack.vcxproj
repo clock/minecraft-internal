@@ -178,7 +178,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cheat.hpp" />
-    <ClInclude Include="common.hpp" />
     <ClInclude Include="c_active_render_info.hpp" />
     <ClInclude Include="c_entity.hpp" />
     <ClInclude Include="c_minecraft.hpp" />

@@ -12,6 +12,7 @@ bool hooks::wgl_swap_buffers_hook(HDC hdc) {
 
     static bool once = [](HDC hdc) -> bool {
         gui::init(hdc);
+        printf("initialized gui\n");
         return true;
     }(hdc);
 
