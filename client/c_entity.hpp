@@ -12,6 +12,7 @@ public:
 	int get_id();
 	bool is_valid();
 	bool is_dead();
+	bool is_sneaking();
 	int get_hurt_time_resistant();
 	bool is_invulnerable();
 	bool is_velocity_changed();

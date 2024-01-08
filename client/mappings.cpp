@@ -44,6 +44,9 @@ void init_mappings() {
 	entity_class.fields["y"] = { "posY", "D" };
 	entity_class.fields["z"] = { "posZ", "D" };
 
+	// sneaking
+	entity_class.methods["sneaking"] = { "isSneaking", "()Z" };
+
 	// death
 	entity_class.fields["death"] = { "isDead", "Z" };
 

@@ -8,6 +8,7 @@
 #include "c_active_render_info.hpp"
 #include "c_render_manager.hpp"
 #include "geometry.h"
+#include <vector>
 
 struct esp_data {
 	Vector2 pos;
@@ -15,7 +16,7 @@ struct esp_data {
 };
 
 namespace esp {
-	inline esp_data test_point;
+	inline std::vector<esp_data> test_point;
 	void update_data();
 	void draw();
 }

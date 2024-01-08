@@ -123,3 +123,12 @@ double c_entity::get_motion_x() {
 
 	return buf;
 }
+
+bool c_entity::is_sneaking() {
+	jclass entity_class = get_class();
+
+	jmethodID is_sneaking = java_instance->env->GetMethodID(entity_class, mappings["entity"].methods["sneaking"].method_name, mappings["entity"].methods["sneaking"].method_sig);
+	auto buf = java_instance->env->CallBooleanMethod(this->player_instance, is_sneaking);
+
+	return buf;
+}
