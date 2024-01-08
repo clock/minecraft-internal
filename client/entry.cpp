@@ -88,9 +88,15 @@ void main_thread(void* instance) {
 
 void unload(void* instance, const char* reason) {
 	printf("Unloading: %s\n", reason);
-	if (java_instance->vm != nullptr)
+
+	if (java_instance->vm != nullptr) {
+		if (globals::timer->get_class() != nullptr)
+			globals::timer->set_timer_speed(1.f);
 		java_instance->vm->DetachCurrentThread();
+	}
+
 	gui::shutdown();
+
 	auto console_window = GetConsoleWindow();
 	FreeConsole();
 	PostMessageA(console_window, WM_QUIT, 0, 0);

@@ -19,6 +19,7 @@ struct esp_data {
 	std::string name;
 	int health;
 	int max_health;
+	float distance;
 };
 
 namespace esp {

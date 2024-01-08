@@ -22,7 +22,7 @@ void esp::draw() {
 
 		esp::box(data);
 		esp::name(data);
-		//esp::health(data);
+		esp::health(data);
 
 	}
 	
@@ -31,6 +31,10 @@ void esp::draw() {
 
 void esp::name(esp_data data) {
 	
+	// since they already have names above their head, we don't need to draw the name if they are too close
+	if (data.distance < 10)
+		return;
+
 	std::string name = data.name;
 
 	// truncate name if too long (old ayyware crasher meme)
@@ -63,6 +67,9 @@ void esp::box(esp_data data) {
 }
 
 void esp::health(esp_data data) {
+
+	if (data.box.h <= 0)
+		return;
 
 	// health bar will be green if health is near max (or max) and red if health is low
 	const float health_percentage = (float)data.health / (float)data.max_health;
@@ -133,12 +140,23 @@ void esp::update_data() {
 
 	std::vector<esp_data> point_buffer;
 
+	globals::timer->set_timer_speed(1.1);
+
 	for (auto player : players) {
 
 		if (player->get_id() == local_player->get_id())
 			continue;
 
 		if (player->is_valid() == false)
+			continue;
+
+		double x = player->get_x();
+		double y = player->get_y();
+		double z = player->get_z();
+
+		double dist = sqrt(pow(x - local_player->get_x(), 2) + pow(y - local_player->get_y(), 2) + pow(z - local_player->get_z(), 2));
+
+		if (dist > esp::max_distance)
 			continue;
 
 		std::string player_name = player->get_name();
@@ -152,6 +170,7 @@ void esp::update_data() {
 		data.box = box;
 		data.health = player->get_health();
 		data.max_health = player->get_max_health();
+		data.distance = dist;
 
 		point_buffer.push_back(data);
 	}
@@ -168,12 +187,7 @@ bool esp::compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity
 	double y = player->get_y();
 	double z = player->get_z();
 
-	double dist = sqrt(pow(x - local_player->get_x(), 2) + pow(y - local_player->get_y(), 2) + pow(z - local_player->get_z(), 2));
-
-	if (dist > esp::max_distance)
-		return false;
-
-	float player_offset = 2.25f;
+	float player_offset = 2.125f;
 	if (player->is_sneaking())
 		player_offset -= .175f;
 
