@@ -18,7 +18,7 @@ void esp::draw() {
 	if (globals::render_manager == nullptr)
 		return;
 
-	for (auto data : esp::test_point) {
+	for (auto data : esp::entity_points) {
 
 		esp::box(data);
 		esp::name(data);
@@ -46,12 +46,6 @@ void esp::name(esp_data data) {
 }
 
 void esp::box(esp_data data) {
-	
-	ImGui::GetBackgroundDrawList()->AddRectFilled(
-		ImVec2(data.box.test_x - 3, data.box.test_y - 3),
-		ImVec2(data.box.test_x + 3, data.box.test_y + 3),
-		ImColor(255, 255, 255)
-	);
 
 	ImGui::GetBackgroundDrawList()->AddRect(
 		ImVec2(data.box.x, data.box.y),
@@ -162,7 +156,7 @@ void esp::update_data() {
 		point_buffer.push_back(data);
 	}
 
-	esp::test_point = point_buffer;
+	esp::entity_points = point_buffer;
 }
 
 bool esp::compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity> local_player, c_active_render_info render_info, box_t& bbox) {
@@ -179,13 +173,13 @@ bool esp::compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity
 	if (dist > esp::max_distance)
 		return false;
 
-	float player_offset = 2.25;
+	float player_offset = 2.25f;
 	if (player->is_sneaking())
-		player_offset -= .175;
+		player_offset -= .175f;
 
-	float local_player_offset = 3.4;
+	float local_player_offset = 3.4f;
 	if (local_player->is_sneaking())
-		local_player_offset -= .175;
+		local_player_offset -= .175f;
 
 	Vector3 entity_pos = Vector3(x, y, z);
 	Vector3 entity_tick_prev_pos = Vector3(player->get_prev_x(), player->get_prev_y(), player->get_prev_z());
@@ -203,9 +197,6 @@ bool esp::compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity
 	orgin.y -= player_offset;
 	if (!c_world_to_screen::world_to_screen((orgin), render_info.get_modelview_matrix(), render_info.get_projection_matrix(), (int)screenSize.x, (int)screenSize.y, top))
 		return false;
-
-	bbox.test_x = top.x;
-	bbox.test_y = top.y;
 
 	bbox.x = int(top.x - ((bottom.y - top.y) / 2) / 2);
 	bbox.y = int(top.y);

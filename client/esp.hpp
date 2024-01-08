@@ -11,7 +11,7 @@
 #include <vector>
 
 struct box_t {
-	int x, y, w, h, test_x, test_y;
+	int x, y, w, h;
 };
 
 struct esp_data {
@@ -26,7 +26,7 @@ namespace esp {
 	// put in config
 	const int max_distance = 35;
 
-	inline std::vector<esp_data> test_point;
+	inline std::vector<esp_data> entity_points;
 	void update_data();
 	bool compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity> local_player, c_active_render_info render_info, box_t& box);
 	void box(esp_data data);
