@@ -150,3 +150,30 @@ int c_entity::get_max_health() {
 
 	return buf;
 }
+
+double c_entity::get_prev_x() {
+	jclass entity_class = get_class();
+
+	jfieldID prev_x = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["prev_x"].field_name, mappings["entity"].fields["prev_x"].field_sig);
+	auto buf = java_instance->env->GetDoubleField(this->player_instance, prev_x);
+
+	return buf;
+}
+
+double c_entity::get_prev_y() {
+	jclass entity_class = get_class();
+
+	jfieldID prev_y = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["prev_y"].field_name, mappings["entity"].fields["prev_y"].field_sig);
+	auto buf = java_instance->env->GetDoubleField(this->player_instance, prev_y);
+
+	return buf;
+}
+
+double c_entity::get_prev_z() {
+	jclass entity_class = get_class();
+
+	jfieldID prev_z = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["prev_z"].field_name, mappings["entity"].fields["prev_z"].field_sig);
+	auto buf = java_instance->env->GetDoubleField(this->player_instance, prev_z);
+
+	return buf;
+}

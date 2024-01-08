@@ -11,7 +11,7 @@
 #include <vector>
 
 struct box_t {
-	int x, y, w, h;
+	int x, y, w, h, test_x, test_y;
 };
 
 struct esp_data {

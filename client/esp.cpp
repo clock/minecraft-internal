@@ -22,7 +22,7 @@ void esp::draw() {
 
 		esp::box(data);
 		esp::name(data);
-		esp::health(data);
+		//esp::health(data);
 
 	}
 	
@@ -47,6 +47,12 @@ void esp::name(esp_data data) {
 
 void esp::box(esp_data data) {
 	
+	ImGui::GetBackgroundDrawList()->AddRectFilled(
+		ImVec2(data.box.test_x - 3, data.box.test_y - 3),
+		ImVec2(data.box.test_x + 3, data.box.test_y + 3),
+		ImColor(255, 255, 255)
+	);
+
 	ImGui::GetBackgroundDrawList()->AddRect(
 		ImVec2(data.box.x, data.box.y),
 		ImVec2(data.box.x + data.box.w, data.box.y + data.box.h),
@@ -181,17 +187,25 @@ bool esp::compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity
 	if (local_player->is_sneaking())
 		local_player_offset -= .175;
 
-	Vector2 bottom;
+	Vector3 entity_pos = Vector3(x, y, z);
+	Vector3 entity_tick_prev_pos = Vector3(player->get_prev_x(), player->get_prev_y(), player->get_prev_z());
 
 	Vector3 render_pos = Vector3(globals::render_manager->get_render_posx(), globals::render_manager->get_render_posy() + local_player_offset, globals::render_manager->get_render_posz());
-	if (!c_world_to_screen::world_to_screen((render_pos)-Vector3(x, y, z), render_info.get_modelview_matrix(), render_info.get_projection_matrix(), (int)screenSize.x, (int)screenSize.y, bottom))
+	Vector3 orgin{ render_pos - entity_tick_prev_pos + (entity_tick_prev_pos - entity_pos) * globals::timer->get_render_partial_ticks() };
+
+	Vector2 bottom;
+
+	if (!c_world_to_screen::world_to_screen((orgin), render_info.get_modelview_matrix(), render_info.get_projection_matrix(), (int)screenSize.x, (int)screenSize.y, bottom))
 		return false;
 
 	Vector2 top;
 
-	y += player_offset;
-	if (!c_world_to_screen::world_to_screen((render_pos)-Vector3(x, y, z), render_info.get_modelview_matrix(), render_info.get_projection_matrix(), (int)screenSize.x, (int)screenSize.y, top))
+	orgin.y -= player_offset;
+	if (!c_world_to_screen::world_to_screen((orgin), render_info.get_modelview_matrix(), render_info.get_projection_matrix(), (int)screenSize.x, (int)screenSize.y, top))
 		return false;
+
+	bbox.test_x = top.x;
+	bbox.test_y = top.y;
 
 	bbox.x = int(top.x - ((bottom.y - top.y) / 2) / 2);
 	bbox.y = int(top.y);

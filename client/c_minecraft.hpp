@@ -5,6 +5,7 @@
 #include "c_entity.hpp"
 #include "c_world.hpp"
 #include "c_render_manager.hpp"
+#include "c_timer.hpp"
 
 class c_minecraft {
 public:
@@ -12,6 +13,7 @@ public:
 	jobject get_instance();
 	c_entity get_local_player();
 	c_world get_world();
+	c_timer get_timer();
 	c_render_manager get_render_manager();
 };
 

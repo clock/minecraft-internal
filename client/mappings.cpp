@@ -16,6 +16,9 @@ void init_mappings() {
 	minecraft_class.fields["get_player"] = { "thePlayer", "Lnet/minecraft/client/entity/EntityPlayerSP;" };
 	minecraft_class.fields["get_world"] = { "theWorld", "Lnet/minecraft/client/multiplayer/WorldClient;" };
 
+	// timer
+	minecraft_class.fields["get_timer"] = { "timer", "Lnet/minecraft/util/Timer;" };
+
 	/* world class */
 	klass world_class;
 	world_class.class_name = "net.minecraft.world.World";
@@ -43,6 +46,11 @@ void init_mappings() {
 	entity_class.fields["x"] = { "posX", "D" };
 	entity_class.fields["y"] = { "posY", "D" };
 	entity_class.fields["z"] = { "posZ", "D" };
+
+	// prev x, y, z
+	entity_class.fields["prev_x"] = { "lastTickPosX", "D" };
+	entity_class.fields["prev_y"] = { "lastTickPosY", "D" };
+	entity_class.fields["prev_z"] = { "lastTickPosZ", "D" };
 
 	// sneaking
 	entity_class.methods["sneaking"] = { "isSneaking", "()Z" };
@@ -86,6 +94,16 @@ void init_mappings() {
 	entity_living_base_class.methods["health"] = { "getHealth", "()F" };
 	entity_living_base_class.methods["max_health"] = { "getMaxHealth", "()F" };
 
+	/* timer class */
+	klass timer_class;
+	timer_class.class_name = "net.minecraft.util.Timer";
+
+	// render partial ticks
+	timer_class.fields["render_partial_ticks"] = { "renderPartialTicks", "F" };
+
+	// timer speed
+	timer_class.fields["timer_speed"] = { "timerSpeed", "F" };
+
 	// add to mappings map
 	mappings["minecraft"] = minecraft_class;
 	mappings["world"] = world_class;
@@ -93,4 +111,5 @@ void init_mappings() {
 	mappings["active_render_info"] = active_render_info_class;
 	mappings["render_manager"] = render_manager_class;
 	mappings["entity_living_base"] = entity_living_base_class;
+	mappings["timer"] = timer_class;
 }

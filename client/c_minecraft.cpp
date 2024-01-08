@@ -49,3 +49,15 @@ c_render_manager c_minecraft::get_render_manager() {
 
 	return c_render_manager(buf);
 }
+
+c_timer c_minecraft::get_timer() {
+	jobject minecraft_instance = this->get_instance();
+	jclass minecraft_class = this->get_class();
+
+	jfieldID get_timer = java_instance->env->GetFieldID(minecraft_class, mappings["minecraft"].fields["get_timer"].field_name, mappings["minecraft"].fields["get_timer"].field_sig);
+	auto buf = java_instance->env->GetObjectField(minecraft_instance, get_timer);
+
+	java_instance->env->DeleteLocalRef(minecraft_instance);
+
+	return c_timer(buf);
+}

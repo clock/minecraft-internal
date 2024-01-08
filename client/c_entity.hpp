@@ -9,6 +9,9 @@ public:
 	double get_x();
 	double get_y();
 	double get_z();
+	double get_prev_x();
+	double get_prev_y();
+	double get_prev_z();
 	int get_id();
 	bool is_valid();
 	bool is_dead();

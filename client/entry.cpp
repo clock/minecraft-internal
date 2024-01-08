@@ -72,6 +72,9 @@ void main_thread(void* instance) {
 		// get render manager instance
 		globals::render_manager = std::make_unique<c_render_manager>(globals::minecraft->get_render_manager());
 
+		// get timer instance
+		globals::timer = std::make_unique<c_timer>(globals::minecraft->get_timer());
+
 		run_cheat();
 		Sleep(1);
 	}
