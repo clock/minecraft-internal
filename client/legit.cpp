@@ -4,8 +4,16 @@
 #include "math.hpp"
 #include "globals.hpp"
 #include <cmath>
+#include <random>
+#include <chrono>
+#include "config.hpp"
 
 void legit::run() {
+
+	printf("%i\n", *config::get<bool>("aimbot_enabled"));
+
+	if (!config::get<bool>("aimbot_enabled"))
+		return;
 
 	if (globals::minecraft == nullptr)
 		return;
@@ -113,9 +121,9 @@ void legit::angle_aimbot(c_entity* local_player, c_entity* target) {
 	Vector2 head_diff = math::wrap_angle_to_180(local_angles.Invert() - player_head_pos.Invert());
 	Vector2 foot_diff = math::wrap_angle_to_180(local_angles.Invert() - player_foot_pos.Invert());
 
-	SmoothingMode mode = SmoothingMode::SMOOTHSTEP;
+	SmoothingMode mode = SmoothingMode::LOGARITHMIC;
 
-	const float smooth = 10;
+	const float smooth = 10000000;
 
 	float target_yaw;
 	float target_pitch;

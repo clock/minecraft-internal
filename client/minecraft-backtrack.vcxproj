@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="config.cpp" />
     <ClCompile Include="c_active_render_info.cpp" />
     <ClCompile Include="c_entity.cpp" />
     <ClCompile Include="c_minecraft.cpp" />
@@ -181,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cheat.hpp" />
+    <ClInclude Include="config.hpp" />
     <ClInclude Include="c_active_render_info.hpp" />
     <ClInclude Include="c_entity.hpp" />
     <ClInclude Include="c_minecraft.hpp" />

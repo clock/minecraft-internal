@@ -11,6 +11,7 @@
 #include "cheat.hpp"
 #include "globals.hpp"
 #include "gui.hpp"
+#include "config.hpp"
 
 void unload(void* instance, const char* reason = "No reason given.");
 
@@ -51,6 +52,8 @@ void main_thread(void* instance) {
 	java_instance->get_loaded_classes();
 	
 	hooks::init();
+
+	config::init();
 
 	// init mappings
 	init_mappings(); // in the end we will have a server that sends us the mappings for different version support.

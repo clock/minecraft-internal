@@ -4,13 +4,15 @@
 #include "imgui/imgui_impl_win32.h"
 #include "imgui/imgui_impl_opengl2.h"
 #include "globals.hpp"
+#include "config.hpp"
 
 void gui::draw() {
     ImGui::SetNextWindowSize({ 300, 200 }, ImGuiCond_Once);
     ImGui::Begin("test gui", 0);
 
+    ImGui::Checkbox("checkbox 1", config::get<bool>("aimbot_enabled"));
     ImGui::SliderFloat("slider 1", &slide, 0.f, 1.f);
-
+    
     ImGui::End();
 }
 
