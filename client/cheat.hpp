@@ -18,7 +18,7 @@ inline void run_cheat() {
 		return;
 
 	// get local player as shared_ptr
-	//std::shared_ptr<c_entity> local_player = std::make_shared<c_entity>(globals::minecraft->get_local_player());
+	std::shared_ptr<c_entity> local_player = std::make_shared<c_entity>(globals::minecraft->get_local_player());
 	
 	// should get players from world too later
 
@@ -31,7 +31,7 @@ inline void run_cheat() {
 		//return;
 
 	// run legitbot
-	//Legit::run(local_player.get(), globals::world.get());
+	legit::run();
 	
 	// run visuals
 	esp::update_data();

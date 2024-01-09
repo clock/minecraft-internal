@@ -80,7 +80,6 @@ void main_thread(void* instance) {
 	}
 
 	// sleep, shutdown, sleep, unload
-	Sleep(1000);
 	hooks::shutdown();
 	Sleep(1000);
 	unload(instance);

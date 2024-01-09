@@ -9,6 +9,14 @@ public:
 	double get_x();
 	double get_y();
 	double get_z();
+	float get_yaw();
+	float get_pitch();
+	float get_prev_yaw();
+	float get_prev_pitch();
+	void set_yaw(float yaw);
+	void set_pitch(float pitch);
+	void set_prev_yaw(float yaw);
+	void set_prev_pitch(float pitch);
 	double get_prev_x();
 	double get_prev_y();
 	double get_prev_z();
@@ -16,8 +24,8 @@ public:
 	bool is_valid();
 	bool is_dead();
 	bool is_sneaking();
-	int get_health();
-	int get_max_health();
+	float get_health();
+	float get_max_health();
 	int get_hurt_time_resistant();
 	bool is_invulnerable();
 	bool is_velocity_changed();

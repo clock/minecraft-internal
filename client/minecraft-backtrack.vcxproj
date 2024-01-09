@@ -166,6 +166,7 @@
     <ClCompile Include="legit.cpp" />
     <ClCompile Include="mappings.cpp" />
     <ClCompile Include="c_render_manager.cpp" />
+    <ClCompile Include="math.cpp" />
     <ClCompile Include="misc.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="src\buffer.c" />
@@ -203,6 +204,7 @@
     <ClInclude Include="legit.hpp" />
     <ClInclude Include="mappings.hpp" />
     <ClInclude Include="c_render_manager.hpp" />
+    <ClInclude Include="math.hpp" />
     <ClInclude Include="misc.hpp" />
     <ClInclude Include="renderer.hpp" />
     <ClInclude Include="src\buffer.h" />

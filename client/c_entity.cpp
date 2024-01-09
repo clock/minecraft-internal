@@ -133,7 +133,7 @@ bool c_entity::is_sneaking() {
 	return buf;
 }
 
-int c_entity::get_health() {
+float c_entity::get_health() {
 	jclass living_base_class = java_instance->get_class(mappings["entity_living_base"].class_name);
 
 	jmethodID get_health = java_instance->env->GetMethodID(living_base_class, mappings["entity_living_base"].methods["health"].method_name, mappings["entity_living_base"].methods["health"].method_sig);
@@ -142,7 +142,7 @@ int c_entity::get_health() {
 	return buf;
 }
 
-int c_entity::get_max_health() {
+float c_entity::get_max_health() {
 	jclass living_base_class = java_instance->get_class(mappings["entity_living_base"].class_name);
 
 	jmethodID get_max_health = java_instance->env->GetMethodID(living_base_class, mappings["entity_living_base"].methods["max_health"].method_name, mappings["entity_living_base"].methods["max_health"].method_sig);
@@ -174,6 +174,70 @@ double c_entity::get_prev_z() {
 
 	jfieldID prev_z = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["prev_z"].field_name, mappings["entity"].fields["prev_z"].field_sig);
 	auto buf = java_instance->env->GetDoubleField(this->player_instance, prev_z);
+
+	return buf;
+}
+
+void c_entity::set_yaw(float yaw) {
+	jclass entity_class = get_class();
+
+	jfieldID yaw_field = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["yaw"].field_name, mappings["entity"].fields["yaw"].field_sig);
+	java_instance->env->SetFloatField(this->player_instance, yaw_field, yaw);
+}
+
+void c_entity::set_pitch(float pitch) {
+	jclass entity_class = get_class();
+
+	jfieldID pitch_field = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["pitch"].field_name, mappings["entity"].fields["pitch"].field_sig);
+	java_instance->env->SetFloatField(this->player_instance, pitch_field, pitch);
+}
+
+void c_entity::set_prev_yaw(float yaw) {
+	jclass entity_class = get_class();
+
+	jfieldID prev_yaw_field = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["prev_yaw"].field_name, mappings["entity"].fields["prev_yaw"].field_sig);
+	java_instance->env->SetFloatField(this->player_instance, prev_yaw_field, yaw);
+}
+
+void c_entity::set_prev_pitch(float pitch) {
+	jclass entity_class = get_class();
+
+	jfieldID prev_pitch_field = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["prev_pitch"].field_name, mappings["entity"].fields["prev_pitch"].field_sig);
+	java_instance->env->SetFloatField(this->player_instance, prev_pitch_field, pitch);
+}
+
+float c_entity::get_yaw() {
+	jclass entity_class = get_class();
+
+	jfieldID yaw_field = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["yaw"].field_name, mappings["entity"].fields["yaw"].field_sig);
+	auto buf = java_instance->env->GetFloatField(this->player_instance, yaw_field);
+
+	return buf;
+}
+
+float c_entity::get_pitch() {
+	jclass entity_class = get_class();
+
+	jfieldID pitch_field = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["pitch"].field_name, mappings["entity"].fields["pitch"].field_sig);
+	auto buf = java_instance->env->GetFloatField(this->player_instance, pitch_field);
+
+	return buf;
+}
+
+float c_entity::get_prev_yaw() {
+	jclass entity_class = get_class();
+
+	jfieldID prev_yaw_field = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["prev_yaw"].field_name, mappings["entity"].fields["prev_yaw"].field_sig);
+	auto buf = java_instance->env->GetFloatField(this->player_instance, prev_yaw_field);
+
+	return buf;
+}
+
+float c_entity::get_prev_pitch() {
+	jclass entity_class = get_class();
+
+	jfieldID prev_pitch_field = java_instance->env->GetFieldID(entity_class, mappings["entity"].fields["prev_pitch"].field_name, mappings["entity"].fields["prev_pitch"].field_sig);
+	auto buf = java_instance->env->GetFloatField(this->player_instance, prev_pitch_field);
 
 	return buf;
 }

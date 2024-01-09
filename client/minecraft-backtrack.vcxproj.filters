@@ -130,6 +130,9 @@
     <ClCompile Include="renderer.cpp">
       <Filter>source\sdk</Filter>
     </ClCompile>
+    <ClCompile Include="math.cpp">
+      <Filter>source\sdk\math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\buffer.h">
@@ -233,6 +236,9 @@
     </ClInclude>
     <ClInclude Include="renderer.hpp">
       <Filter>source\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="math.hpp">
+      <Filter>source\sdk\math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

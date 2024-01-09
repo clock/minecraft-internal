@@ -62,6 +62,10 @@ void init_mappings() {
 	entity_class.fields["yaw"] = { "rotationYaw", "F" };
 	entity_class.fields["pitch"] = { "rotationPitch", "F" };
 
+	// old yaw, pitch
+	entity_class.fields["old_yaw"] = { "prevRotationYaw", "F" };
+	entity_class.fields["old_pitch"] = { "prevRotationPitch", "F" };
+
 	// entity id
 	entity_class.methods["id"] = { "getEntityId", "()I" };
 

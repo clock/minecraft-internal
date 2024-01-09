@@ -51,7 +51,7 @@ void esp::block_esp() {
 	glEnable(GL_BLEND);
 	glLineWidth(1.f);
 
-	for (auto block : esp::block_points)
+	for (const auto& block : esp::block_points)
 		renderer::gl::draw_outlined_box(block.bounding_box);
 
 	glDisable(GL_BLEND);
@@ -184,7 +184,9 @@ void esp::update_data() {
 	
 	std::vector<esp_data> point_buffer;
 	std::vector<block_data> block_buffer;
-
+	
+	// example of how to add a block to the block buffer
+	/*
 	Vector3 block_pos = Vector3(5, 78, -4);
 	block_pos = block_pos - Vector3(globals::render_manager->get_render_posx(), globals::render_manager->get_render_posy(), globals::render_manager->get_render_posz());
 	block_buffer.push_back(block_data(BoundingBox(block_pos.x, block_pos.y, block_pos.z, block_pos.x + 1, block_pos.y + 1, block_pos.z + 1)));
@@ -192,6 +194,7 @@ void esp::update_data() {
 	block_pos = Vector3(5, 78, -5);
 	block_pos = block_pos - Vector3(globals::render_manager->get_render_posx(), globals::render_manager->get_render_posy(), globals::render_manager->get_render_posz());
 	block_buffer.push_back(block_data(BoundingBox(block_pos.x, block_pos.y, block_pos.z, block_pos.x + 1, block_pos.y + 1, block_pos.z + 1)));
+	*/
 
 	for (auto player : players) {
 
