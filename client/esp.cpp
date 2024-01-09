@@ -7,6 +7,7 @@
 #include "imgui/imgui_impl_opengl2.h"
 #include <algorithm>
 #include "renderer.hpp"
+#include "config.hpp"
 
 void esp::draw() {
 	
@@ -19,18 +20,25 @@ void esp::draw() {
 	if (globals::render_manager == nullptr)
 		return;
 
+	if (!*config::get<bool>("esp_enabled"))
+		return;
+
 	for (auto data : esp::entity_points) {
 
-		esp::box(data);
-		esp::name(data);
-		esp::health(data);
+		if (*config::get<bool>("esp_player_box"))
+			esp::box(data);
+		if (*config::get<bool>("esp_player_name"))
+			esp::name(data);
+		if (*config::get<bool>("esp_player_health"))
+			esp::health(data);
 
 	}
 
 	if (esp::proj_matrix_arr[0] == 0.f || esp::model_matrix_arr[0] == 0.f)
 		return;
 
-	//esp::block_esp();
+	if (*config::get<bool>("esp_block_esp"))
+		esp::block_esp();
 
 	return;
 }
@@ -213,7 +221,7 @@ void esp::update_data() {
 
 		double dist = sqrt(pow(x - local_player->get_x(), 2) + pow(y - local_player->get_y(), 2) + pow(z - local_player->get_z(), 2));
 
-		if (dist > esp::max_distance)
+		if (dist > *config::get<float>("esp_max_distance"))
 			continue;
 
 		std::string player_name = player->get_name();

@@ -10,8 +10,6 @@
 
 void legit::run() {
 
-	printf("%i\n", *config::get<bool>("aimbot_enabled"));
-
 	if (!config::get<bool>("aimbot_enabled"))
 		return;
 
@@ -35,11 +33,8 @@ void legit::run() {
 	// so there will be two versions of aim assist, one that is based on angles and one that is based on mouse movement
 	// the mouse movement one will just world to screen and move mouse accordingly not having to worry about any messed up math
 
-	// config system later
-	bool used_angle_based = true;
-
 	// angle based aim assist
-	if (used_angle_based)
+	if (*config::get<AimbotMode>("aimbot_mode"))
 		legit::angle_aimbot(local_player.get(), target.get());
 	
 	// mouse based aim assist
@@ -74,8 +69,7 @@ c_entity legit::get_closest_player(c_entity* local_player, c_world* world) {
 		// get distance between local player and player
 		double dist = sqrt(pow(x - local_player->get_x(), 2) + pow(y - local_player->get_y(), 2) + pow(z - local_player->get_z(), 2));
 
-		// config system later
-		if (dist > 5)
+		if (dist > *config::get<float>("aimbot_target_dist"))
 			continue;
 
 		// if the distance is less than the closest distance
@@ -93,15 +87,6 @@ c_entity legit::get_closest_player(c_entity* local_player, c_world* world) {
 
 	return *closest_player;
 }
-
-enum SmoothingMode {
-	LINEAR,
-	EXPONENTIAL,
-	SINUSOIDAL,
-	LOGARITHMIC,
-	LERP,
-	SMOOTHSTEP
-};
 
 void legit::angle_aimbot(c_entity* local_player, c_entity* target) {
 	// get the local player's yaw and pitch
@@ -121,9 +106,9 @@ void legit::angle_aimbot(c_entity* local_player, c_entity* target) {
 	Vector2 head_diff = math::wrap_angle_to_180(local_angles.Invert() - player_head_pos.Invert());
 	Vector2 foot_diff = math::wrap_angle_to_180(local_angles.Invert() - player_foot_pos.Invert());
 
-	SmoothingMode mode = SmoothingMode::LOGARITHMIC;
+	SmoothingMode mode = *config::get<SmoothingMode>("aimbot_smoothing_mode");
 
-	const float smooth = 10000000;
+	float smooth = *config::get<float>("aimbot_smoothing");
 
 	float target_yaw;
 	float target_pitch;
@@ -173,7 +158,6 @@ void legit::angle_aimbot(c_entity* local_player, c_entity* target) {
 			break;
 	}
 
-	// set the local player's yaw and pitch to the target yaw and pitch
 	local_player->set_yaw(target_yaw);
 	local_player->set_pitch(target_pitch);
 }

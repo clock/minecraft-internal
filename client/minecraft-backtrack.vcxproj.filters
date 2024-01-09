@@ -133,6 +133,9 @@
     <ClCompile Include="renderer.cpp">
       <Filter>source\cheat</Filter>
     </ClCompile>
+    <ClCompile Include="config.cpp">
+      <Filter>source\cheat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\buffer.h">
@@ -239,6 +242,9 @@
     </ClInclude>
     <ClInclude Include="java.hpp">
       <Filter>source\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="config.hpp">
+      <Filter>source\cheat</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

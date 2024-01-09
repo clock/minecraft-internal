@@ -3,6 +3,20 @@
 #include <unordered_map>
 #include <string>
 
+enum SmoothingMode {
+    LINEAR,
+    EXPONENTIAL,
+    SINUSOIDAL,
+    LOGARITHMIC,
+    LERP,
+    SMOOTHSTEP
+};
+
+enum AimbotMode {
+    ANGLE,
+    MOUSE,
+};
+
 struct data {
     char data[32];
 };

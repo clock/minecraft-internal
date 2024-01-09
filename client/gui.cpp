@@ -10,9 +10,23 @@ void gui::draw() {
     ImGui::SetNextWindowSize({ 300, 200 }, ImGuiCond_Once);
     ImGui::Begin("test gui", 0);
 
-    ImGui::Checkbox("checkbox 1", config::get<bool>("aimbot_enabled"));
-    ImGui::SliderFloat("slider 1", &slide, 0.f, 1.f);
-    
+    ImGui::Checkbox("aimbot", config::get<bool>("aimbot_enabled"));
+    ImGui::SliderFloat("smoothing", config::get<float>("aimbot_smoothing"), 1.f, 100.f, "%.2f");
+    ImGui::SliderFloat("target distance", config::get<float>("aimbot_target_dist"), 1.f, 10.f, "%.2f");
+
+    const char* smoothing_modes[] = { "linear", "exponential", "sinusoidal", "logarithmic", "lerp", "smoothstep" };
+    ImGui::Combo("smoothing mode", (int*)config::get<SmoothingMode>("aimbot_smoothing_mode"), smoothing_modes, IM_ARRAYSIZE(smoothing_modes));
+
+    const char* aimbot_modes[] = { "angle", "mouse" };
+    ImGui::Combo("aimbot mode", (int*)config::get<AimbotMode>("aimbot_mode"), aimbot_modes, IM_ARRAYSIZE(aimbot_modes));
+
+    ImGui::Checkbox("esp", config::get<bool>("esp_enabled"));
+    ImGui::SliderFloat("max distance", config::get<float>("esp_max_distance"), 1.f, 100.f, "%.2f");
+    ImGui::Checkbox("player box", config::get<bool>("esp_player_box"));
+    ImGui::Checkbox("player health", config::get<bool>("esp_player_health"));
+    ImGui::Checkbox("player name", config::get<bool>("esp_player_name"));
+    ImGui::Checkbox("block esp", config::get<bool>("esp_block_esp"));
+
     ImGui::End();
 }
 

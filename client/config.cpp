@@ -16,14 +16,7 @@ std::string get_cheat_config_folder() {
         // Convert wide string to narrow string
         return std::string(wide_path.begin(), wide_path.end()) + "\\cheat\\";
     }
-}
-
-void config::get_config_names() {
-    for (const auto& entry : std::filesystem::directory_iterator(config::config_folder_path)) {
-        if (entry.is_regular_file() && entry.path().extension() == ".cfg") {
-            config::config_names.push_back(entry.path().string());
-        }
-    }
+    return "";
 }
 
 void config::init() {
@@ -32,6 +25,25 @@ void config::init() {
     config::get_config_names();
 
     config::set<bool>("aimbot_enabled", false);
+    config::set<float>("aimbot_smoothing", 1.f);
+    config::set<float>("aimbot_target_dist", 4.5f);
+    config::set<SmoothingMode>("aimbot_smoothing_mode", SmoothingMode::LINEAR);
+    config::set<AimbotMode>("aimbot_mode", AimbotMode::ANGLE);
+
+    config::set<bool>("esp_enabled", false);
+    config::set<float>("esp_max_distance", 35.f);
+    config::set<bool>("esp_player_box", false);
+    config::set<bool>("esp_player_health", false);
+    config::set<bool>("esp_player_name", false);
+    config::set<bool>("esp_block_esp", false);
+}
+
+void config::get_config_names() {
+    for (const auto& entry : std::filesystem::directory_iterator(config::config_folder_path)) {
+        if (entry.is_regular_file() && entry.path().extension() == ".cfg") {
+            config::config_names.push_back(entry.path().string());
+        }
+    }
 }
 
 bool config::save(std::string name) {

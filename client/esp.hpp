@@ -29,8 +29,6 @@ struct block_data {
 
 namespace esp {
 
-	// put in config
-	const int max_distance = 35;
 	inline Vector2 screen_size;
 	inline GLfloat proj_matrix_arr[16];
 	inline GLfloat model_matrix_arr[16];
