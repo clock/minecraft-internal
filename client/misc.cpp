@@ -86,7 +86,7 @@ void misc::update_data() {
             GetWindowThreadProcessId(hwnd, &win_id);
             if (std::find(pids.begin(), pids.end(), win_id) != pids.end()) {
                 std::wstring title(GetWindowTextLength(hwnd) + 1, L'\0');
-                GetWindowTextW(hwnd, &title[0], title.size());
+                GetWindowTextW(hwnd, &title[0], (int)title.size());
                 if (!title.empty() && title.find(L"-") != std::wstring::npos) {
                     misc::spotify_hwnd = hwnd;
                     return FALSE;
@@ -99,7 +99,7 @@ void misc::update_data() {
     if (misc::spotify_hwnd != nullptr) {
         
         std::string title(GetWindowTextLengthA(misc::spotify_hwnd) + 1, '\0');
-        GetWindowTextA(misc::spotify_hwnd, &title[0], title.size());
+        GetWindowTextA(misc::spotify_hwnd, &title[0], (int)title.size());
 
         if (!title.empty() && title.find("-") != std::string::npos) {
             if (title.length() > 1)

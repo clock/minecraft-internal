@@ -33,8 +33,8 @@ Vector2 math::get_angles(Vector3 src, Vector3 dst) {
 	double d_z = dst.z - src.z;
 
 	double hypothenuse = sqrt(d_x * d_x + d_z * d_z);
-	float yaw = rad_to_deg(atan2(d_z, d_x)) - 90.f;
-	float pitch = rad_to_deg(-atan2(d_y, hypothenuse));
+	float yaw = rad_to_deg((float)atan2(d_z, d_x)) - 90.f;
+	float pitch = rad_to_deg((float)-atan2(d_y, hypothenuse));
 
 	return Vector2(yaw, pitch);
 }

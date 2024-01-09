@@ -87,15 +87,15 @@ void esp::name(esp_data data) {
 void esp::box(esp_data data) {
 
 	ImGui::GetBackgroundDrawList()->AddRect(
-		ImVec2(data.box.x, data.box.y),
-		ImVec2(data.box.x + data.box.w, data.box.y + data.box.h),
+		ImVec2((float)(data.box.x), (float)(data.box.y)),
+		ImVec2((float)(data.box.x + data.box.w), (float)(data.box.y + data.box.h)),
 		ImColor(255, 255, 255)
 	);
 
 	// cool outer online only
 	ImGui::GetBackgroundDrawList()->AddRect(
-		ImVec2(data.box.x - 1, data.box.y - 1),
-		ImVec2(data.box.x + data.box.w + 1, data.box.y + data.box.h + 1),
+		ImVec2((float)(data.box.x - 1), (float)(data.box.y - 1)),
+		ImVec2((float)(data.box.x + data.box.w + 1), (float)(data.box.y + data.box.h + 1)),
 		ImColor(0, 0, 0, 180)
 	);
 
@@ -132,20 +132,20 @@ void esp::health(esp_data data) {
 		bar_size = 0;
 
 	ImGui::GetBackgroundDrawList()->AddRect(
-		ImVec2(data.box.x - 6, data.box.y - 1),
-		ImVec2(data.box.x - 2, data.box.y + data.box.h + 1),
+		ImVec2((float)(data.box.x - 6), (float)(data.box.y - 1)),
+		ImVec2((float)(data.box.x - 2), (float)(data.box.y + data.box.h + 1)),
 		ImColor(0, 0, 0, 180)
 	);
 
 	ImGui::GetBackgroundDrawList()->AddRectFilled(
-		ImVec2(data.box.x - 5, data.box.y),
-		ImVec2(data.box.x - 3, data.box.y + data.box.h),
+		ImVec2((float)(data.box.x - 5), (float)(data.box.y)),
+		ImVec2((float)(data.box.x - 3), (float)(data.box.y + data.box.h)),
 		ImColor(0, 0, 0, 65)
 	);
 
 	ImGui::GetBackgroundDrawList()->AddRectFilled(
-		ImVec2(data.box.x - 5, data.box.y + (data.box.h - bar_size)),
-		ImVec2(data.box.x - 3, data.box.y + data.box.h),
+		ImVec2((float)(data.box.x - 5), (float)(data.box.y + (data.box.h - bar_size))),
+		ImVec2((float)(data.box.x - 3), (float)(data.box.y + data.box.h)),
 		health_color
 	);
 }
@@ -180,7 +180,7 @@ void esp::update_data() {
 	convert_matrix_to_glfloat(modelview_matrix, esp::model_matrix_arr);
 
 	auto viewport = render_info.get_viewport();
-	esp::screen_size = Vector2(viewport[2], viewport[3]);
+	esp::screen_size = Vector2((float)(viewport[2]), (float)(viewport[3]));
 	
 	std::vector<esp_data> point_buffer;
 	std::vector<block_data> block_buffer;
@@ -222,9 +222,9 @@ void esp::update_data() {
 
 		data.name = player_name;
 		data.box = box;
-		data.health = player->get_health();
-		data.max_health = player->get_max_health();
-		data.distance = dist;
+		data.health = (int)player->get_health();
+		data.max_health = (int)player->get_max_health();
+		data.distance = (float)dist;
 
 		point_buffer.push_back(data);
 	}
@@ -247,10 +247,10 @@ bool esp::compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity
 	if (local_player->is_sneaking())
 		local_player_offset -= .175f;
 
-	Vector3 entity_pos = Vector3(x, y, z);
-	Vector3 entity_tick_prev_pos = Vector3(player->get_prev_x(), player->get_prev_y(), player->get_prev_z());
+	Vector3 entity_pos = Vector3((float)x, (float)y, (float)z);
+	Vector3 entity_tick_prev_pos = Vector3((float)player->get_prev_x(), (float)player->get_prev_y(), (float)player->get_prev_z());
 
-	Vector3 render_pos = Vector3(globals::render_manager->get_render_posx(), globals::render_manager->get_render_posy() + local_player_offset, globals::render_manager->get_render_posz());
+	Vector3 render_pos = Vector3((float)globals::render_manager->get_render_posx(), (float)globals::render_manager->get_render_posy() + local_player_offset, (float)globals::render_manager->get_render_posz());
 	Vector3 orgin{ render_pos - entity_tick_prev_pos + (entity_tick_prev_pos - entity_pos) * globals::timer->get_render_partial_ticks() };
 
 	Vector2 bottom;

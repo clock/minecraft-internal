@@ -72,7 +72,7 @@ c_entity legit::get_closest_player(c_entity* local_player, c_world* world) {
 		// if the distance is less than the closest distance
 		if (dist < closest_dist) {
 			// set the closest distance to the distance
-			closest_dist = dist;
+			closest_dist = (float)dist;
 			// set the closest player to the player
 			closest_player = player;
 		}
@@ -89,10 +89,10 @@ void legit::angle_aimbot(c_entity* local_player, c_entity* target) {
 	// get the local player's yaw and pitch
 	Vector2 local_angles = Vector2(local_player->get_yaw(), local_player->get_pitch());
 
-	Vector3 player_pos = Vector3(target->get_x(), target->get_y(), target->get_z());
-	Vector3 local_pos = Vector3(local_player->get_x(), local_player->get_y() + 3.4f, local_player->get_z());
+	Vector3 player_pos = Vector3((float)target->get_x(), (float)target->get_y(), (float)target->get_z());
+	Vector3 local_pos = Vector3((float)local_player->get_x(), (float)local_player->get_y() + 3.4f, (float)local_player->get_z());
 
-	Vector2 player_head_pos = math::get_angles(local_pos, Vector3(player_pos.x, player_pos.y + 3.4, player_pos.z));
+	Vector2 player_head_pos = math::get_angles(local_pos, Vector3((float)player_pos.x, (float)player_pos.y + 3.4f, (float)player_pos.z));
 	Vector2 player_foot_pos = math::get_angles(local_pos, player_pos);
 
 	// get the difference between the local player's yaw and the player's yaw

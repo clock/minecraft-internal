@@ -127,11 +127,11 @@
     <ClCompile Include="c_timer.cpp">
       <Filter>source\sdk</Filter>
     </ClCompile>
-    <ClCompile Include="renderer.cpp">
-      <Filter>source\sdk</Filter>
-    </ClCompile>
     <ClCompile Include="math.cpp">
       <Filter>source\sdk\math</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>source\cheat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -201,9 +201,6 @@
     <ClInclude Include="mappings.hpp">
       <Filter>source\sdk</Filter>
     </ClInclude>
-    <ClInclude Include="java.hpp">
-      <Filter>source\sdk</Filter>
-    </ClInclude>
     <ClInclude Include="c_active_render_info.hpp">
       <Filter>source\sdk</Filter>
     </ClInclude>
@@ -234,11 +231,14 @@
     <ClInclude Include="c_timer.hpp">
       <Filter>source\sdk</Filter>
     </ClInclude>
-    <ClInclude Include="renderer.hpp">
-      <Filter>source\sdk</Filter>
-    </ClInclude>
     <ClInclude Include="math.hpp">
       <Filter>source\sdk\math</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.hpp">
+      <Filter>source\cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="java.hpp">
+      <Filter>source\sdk</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
