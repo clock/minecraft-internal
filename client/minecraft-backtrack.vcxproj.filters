@@ -127,6 +127,9 @@
     <ClCompile Include="c_timer.cpp">
       <Filter>source\sdk</Filter>
     </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>source\sdk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\buffer.h">
@@ -226,6 +229,9 @@
       <Filter>source\features\gui</Filter>
     </ClInclude>
     <ClInclude Include="c_timer.hpp">
+      <Filter>source\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.hpp">
       <Filter>source\sdk</Filter>
     </ClInclude>
   </ItemGroup>

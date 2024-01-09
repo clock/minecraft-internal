@@ -167,6 +167,7 @@
     <ClCompile Include="mappings.cpp" />
     <ClCompile Include="c_render_manager.cpp" />
     <ClCompile Include="misc.cpp" />
+    <ClCompile Include="renderer.cpp" />
     <ClCompile Include="src\buffer.c" />
     <ClCompile Include="src\hde\hde32.c" />
     <ClCompile Include="src\hde\hde64.c" />
@@ -203,6 +204,7 @@
     <ClInclude Include="mappings.hpp" />
     <ClInclude Include="c_render_manager.hpp" />
     <ClInclude Include="misc.hpp" />
+    <ClInclude Include="renderer.hpp" />
     <ClInclude Include="src\buffer.h" />
     <ClInclude Include="src\hde\hde32.h" />
     <ClInclude Include="src\hde\hde64.h" />

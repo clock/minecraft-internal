@@ -6,6 +6,7 @@
 #include "imgui/imgui_impl_win32.h"
 #include "imgui/imgui_impl_opengl2.h"
 #include <algorithm>
+#include "renderer.hpp"
 
 void esp::draw() {
 	
@@ -25,8 +26,42 @@ void esp::draw() {
 		esp::health(data);
 
 	}
-	
+
+	if (esp::proj_matrix_arr[0] == 0.f || esp::model_matrix_arr[0] == 0.f)
+		return;
+
+	esp::block_esp();
+
 	return;
+}
+
+void esp::block_esp() {
+	glPushMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(esp::proj_matrix_arr);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(esp::model_matrix_arr);
+
+	glPushMatrix();
+	glEnable(GL_LINE_SMOOTH);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_TEXTURE_2D);
+	glDepthMask(false);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glLineWidth(1.f);
+
+	for (auto block : esp::block_points)
+		renderer::gl::draw_outlined_box(block.bounding_box);
+
+	glDisable(GL_BLEND);
+	glDepthMask(true);
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_LINE_SMOOTH);
+	glPopMatrix();
+
+	glPopMatrix();
 }
 
 void esp::name(esp_data data) {
@@ -138,9 +173,25 @@ void esp::update_data() {
 	if (render_info.get_class() == nullptr)
 		return;
 
-	std::vector<esp_data> point_buffer;
+	auto projection_matrix = render_info.get_projection_matrix();
+	auto modelview_matrix = render_info.get_modelview_matrix();
 
-	globals::timer->set_timer_speed(1.1);
+	convert_matrix_to_glfloat(projection_matrix, esp::proj_matrix_arr);
+	convert_matrix_to_glfloat(modelview_matrix, esp::model_matrix_arr);
+
+	auto viewport = render_info.get_viewport();
+	esp::screen_size = Vector2(viewport[2], viewport[3]);
+	
+	std::vector<esp_data> point_buffer;
+	std::vector<block_data> block_buffer;
+
+	Vector3 block_pos = Vector3(5, 78, -4);
+	block_pos = block_pos - Vector3(globals::render_manager->get_render_posx(), globals::render_manager->get_render_posy(), globals::render_manager->get_render_posz());
+	block_buffer.push_back(block_data(BoundingBox(block_pos.x, block_pos.y, block_pos.z, block_pos.x + 1, block_pos.y + 1, block_pos.z + 1)));
+
+	block_pos = Vector3(5, 78, -5);
+	block_pos = block_pos - Vector3(globals::render_manager->get_render_posx(), globals::render_manager->get_render_posy(), globals::render_manager->get_render_posz());
+	block_buffer.push_back(block_data(BoundingBox(block_pos.x, block_pos.y, block_pos.z, block_pos.x + 1, block_pos.y + 1, block_pos.z + 1)));
 
 	for (auto player : players) {
 
@@ -163,7 +214,7 @@ void esp::update_data() {
 
 		esp_data data;
 		box_t box;
-		if (!esp::compute_box(player, local_player, render_info, box))
+		if (!esp::compute_box(player, local_player, box))
 			continue;
 
 		data.name = player_name;
@@ -176,12 +227,10 @@ void esp::update_data() {
 	}
 
 	esp::entity_points = point_buffer;
+	esp::block_points = block_buffer;
 }
 
-bool esp::compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity> local_player, c_active_render_info render_info, box_t& bbox) {
-
-	auto viewport = render_info.get_viewport();
-	ImVec2 screenSize = ImVec2(viewport[2], viewport[3]);
+bool esp::compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity> local_player, box_t& bbox) {
 
 	double x = player->get_x();
 	double y = player->get_y();
@@ -203,13 +252,13 @@ bool esp::compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity
 
 	Vector2 bottom;
 
-	if (!c_world_to_screen::world_to_screen((orgin), render_info.get_modelview_matrix(), render_info.get_projection_matrix(), (int)screenSize.x, (int)screenSize.y, bottom))
+	if (!c_world_to_screen::world_to_screen((orgin), esp::model_matrix, esp::proj_matrix, (int)esp::screen_size.x, (int)esp::screen_size.y, bottom))
 		return false;
 
 	Vector2 top;
 
 	orgin.y -= player_offset;
-	if (!c_world_to_screen::world_to_screen((orgin), render_info.get_modelview_matrix(), render_info.get_projection_matrix(), (int)screenSize.x, (int)screenSize.y, top))
+	if (!c_world_to_screen::world_to_screen((orgin), esp::model_matrix, esp::proj_matrix, (int)esp::screen_size.x, (int)esp::screen_size.y, top))
 		return false;
 
 	bbox.x = int(top.x - ((bottom.y - top.y) / 2) / 2);

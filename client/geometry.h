@@ -1,5 +1,7 @@
 #pragma once
 #include <algorithm>
+#include <Windows.h>
+#include <gl/GL.h>
 
 class Vector3
 {
@@ -59,6 +61,25 @@ struct Matrix
 	float m20, m21, m22, m23;
 	float m30, m31, m32, m33;
 };
+
+inline void convert_matrix_to_glfloat(const Matrix& mat, GLfloat out[16]) {
+	out[0] = mat.m00;
+	out[1] = mat.m01;
+	out[2] = mat.m02;
+	out[3] = mat.m03;
+	out[4] = mat.m10;
+	out[5] = mat.m11;
+	out[6] = mat.m12;
+	out[7] = mat.m13;
+	out[8] = mat.m20;
+	out[9] = mat.m21;
+	out[10] = mat.m22;
+	out[11] = mat.m23;
+	out[12] = mat.m30;
+	out[13] = mat.m31;
+	out[14] = mat.m32;
+	out[15] = mat.m33;
+}
 
 struct BoundingBox {
 	double minX;
