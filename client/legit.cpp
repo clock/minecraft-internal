@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include "math.hpp"
 #include "globals.hpp"
+#include <cmath>
 
 void legit::run() {
 
@@ -85,24 +86,84 @@ c_entity legit::get_closest_player(c_entity* local_player, c_world* world) {
 	return *closest_player;
 }
 
+enum SmoothingMode {
+	LINEAR,
+	EXPONENTIAL,
+	SINUSOIDAL,
+	LOGARITHMIC,
+	LERP,
+	SMOOTHSTEP
+};
+
 void legit::angle_aimbot(c_entity* local_player, c_entity* target) {
 	// get the local player's yaw and pitch
 	Vector2 local_angles = Vector2(local_player->get_yaw(), local_player->get_pitch());
 
 	Vector3 player_pos = Vector3((float)target->get_x(), (float)target->get_y(), (float)target->get_z());
-	Vector3 local_pos = Vector3((float)local_player->get_x(), (float)local_player->get_y() + 3.4f, (float)local_player->get_z());
+	Vector3 player_prev_pos = Vector3((float)target->get_prev_x(), (float)target->get_prev_y(), (float)target->get_prev_z());
+	Vector3 local_pos = Vector3(globals::render_manager->get_render_posx(), globals::render_manager->get_render_posy() + 3.4f, globals::render_manager->get_render_posz());
 
-	Vector2 player_head_pos = math::get_angles(local_pos, Vector3((float)player_pos.x, (float)player_pos.y + 3.4f, (float)player_pos.z));
-	Vector2 player_foot_pos = math::get_angles(local_pos, player_pos);
+	float partial_ticks = globals::timer->get_render_partial_ticks();
+	Vector3 origin = player_prev_pos + (player_pos - player_prev_pos) * partial_ticks;
+
+	Vector2 player_head_pos = math::get_angles(local_pos, Vector3((float)origin.x, (float)origin.y + 3.4f, (float)origin.z));
+	Vector2 player_foot_pos = math::get_angles(local_pos, origin);
 
 	// get the difference between the local player's yaw and the player's yaw
 	Vector2 head_diff = math::wrap_angle_to_180(local_angles.Invert() - player_head_pos.Invert());
 	Vector2 foot_diff = math::wrap_angle_to_180(local_angles.Invert() - player_foot_pos.Invert());
 
+	SmoothingMode mode = SmoothingMode::SMOOTHSTEP;
+
 	const float smooth = 10;
 
-	float target_yaw = local_angles.x + ((head_diff.x) / smooth);
-	float target_pitch = local_angles.y + ((head_diff.y) / smooth);
+	float target_yaw;
+	float target_pitch;
+
+	switch (mode) {
+		case LINEAR:
+			target_yaw = local_angles.x + (head_diff.x / smooth);
+			target_pitch = local_angles.y + (head_diff.y / smooth);
+			break;
+		case EXPONENTIAL:
+			target_yaw = local_angles.x + (head_diff.x / pow(smooth, 2));
+			target_pitch = local_angles.y + (head_diff.y / pow(smooth, 2));
+			break;
+		case SINUSOIDAL:
+			target_yaw = local_angles.x + sin(math::pi / 2 * (head_diff.x / 180)) * smooth;
+			target_pitch = local_angles.y + sin(math::pi / 2 * (head_diff.y / 180)) * smooth;
+			break;
+		case LOGARITHMIC:
+			auto sign = [](auto val) {
+				return (val > 0) - (val < 0);
+				};
+			target_yaw = local_angles.x + (log(1 + abs(head_diff.x)) * sign(head_diff.x) / log(smooth + 1));
+			target_pitch = local_angles.y + (log(1 + abs(head_diff.y)) * sign(head_diff.y) / log(smooth + 1));
+			break;
+		case LERP:
+		{
+			auto lerp = [](float start, float end, float t) {
+				return start + t * (end - start);
+				};
+			target_yaw = lerp(local_angles.x, local_angles.x + head_diff.x, 1 / smooth);
+			target_pitch = lerp(local_angles.y, local_angles.y + head_diff.y, 1 / smooth);
+		}
+		break;
+		case SMOOTHSTEP:
+		{
+			auto smoothstep = [](float edge0, float edge1, float x) {
+				x = std::clamp((x - edge0) / (edge1 - edge0), 0.0f, 1.0f);
+				return x * x * (3 - 2 * x);
+				};
+			target_yaw = local_angles.x + smoothstep(0, 1, 1 / smooth) * head_diff.x;
+			target_pitch = local_angles.y + smoothstep(0, 1, 1 / smooth) * head_diff.y;
+		}
+		break;
+		default:
+			target_yaw = local_angles.x + (head_diff.x / smooth);
+			target_pitch = local_angles.y + (head_diff.y / smooth);
+			break;
+	}
 
 	// set the local player's yaw and pitch to the target yaw and pitch
 	local_player->set_yaw(target_yaw);

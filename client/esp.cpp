@@ -30,7 +30,7 @@ void esp::draw() {
 	if (esp::proj_matrix_arr[0] == 0.f || esp::model_matrix_arr[0] == 0.f)
 		return;
 
-	esp::block_esp();
+	//esp::block_esp();
 
 	return;
 }
@@ -51,7 +51,7 @@ void esp::block_esp() {
 	glEnable(GL_BLEND);
 	glLineWidth(1.f);
 
-	for (const auto& block : esp::block_points)
+	for (auto& block : esp::block_points)
 		renderer::gl::draw_outlined_box(block.bounding_box);
 
 	glDisable(GL_BLEND);
@@ -180,7 +180,10 @@ void esp::update_data() {
 	convert_matrix_to_glfloat(modelview_matrix, esp::model_matrix_arr);
 
 	auto viewport = render_info.get_viewport();
-	esp::screen_size = Vector2((float)(viewport[2]), (float)(viewport[3]));
+	
+	esp::screen_size = Vector2((float)viewport[2], (float)viewport[3]);
+	esp::model_matrix = modelview_matrix;
+	esp::proj_matrix = projection_matrix;
 	
 	std::vector<esp_data> point_buffer;
 	std::vector<block_data> block_buffer;
@@ -264,10 +267,10 @@ bool esp::compute_box(std::shared_ptr<c_entity> player, std::shared_ptr<c_entity
 	if (!c_world_to_screen::world_to_screen((orgin), esp::model_matrix, esp::proj_matrix, (int)esp::screen_size.x, (int)esp::screen_size.y, top))
 		return false;
 
-	bbox.x = int(top.x - ((bottom.y - top.y) / 2) / 2);
+	bbox.x = int(top.x - ((bottom.y - top.y) / 2) / 1.75);
 	bbox.y = int(top.y);
 
-	bbox.w = int((bottom.y - top.y) / 2);
+	bbox.w = int((bottom.y - top.y) / 1.75);
 	bbox.h = int(bottom.y - top.y);
 
 	return true;
