@@ -13,7 +13,6 @@ std::string get_cheat_config_folder() {
         std::wstring wide_path(documents_path);
         CoTaskMemFree(documents_path);
 
-        // Convert wide string to narrow string
         return std::string(wide_path.begin(), wide_path.end()) + "\\cheat\\";
     }
     return "";
@@ -40,9 +39,8 @@ void config::init() {
 
 void config::get_config_names() {
     for (const auto& entry : std::filesystem::directory_iterator(config::config_folder_path)) {
-        if (entry.is_regular_file() && entry.path().extension() == ".cfg") {
+        if (entry.is_regular_file() && entry.path().extension() == ".cfg")
             config::config_names.push_back(entry.path().string());
-        }
     }
 }
 
@@ -55,6 +53,7 @@ bool config::save(std::string name) {
         file.write(key.c_str(), strlen(key.c_str()));
         file.write(value.data, sizeof(value));
     }
+    
     file.close();
     return true;
 }
@@ -62,30 +61,24 @@ bool config::save(std::string name) {
 bool config::load(std::string name) {
     std::ifstream file(config::config_folder_path + name, std::ios::binary);
 
-    if (!file.is_open()) {
+    if (!file.is_open())
         return false;
-    }
 
     while (true) {
         uint8_t keyLength;
-        if (!file.read(reinterpret_cast<char*>(&keyLength), sizeof(keyLength))) {
-            // Reached end of file
+        if (!file.read(reinterpret_cast<char*>(&keyLength), sizeof(keyLength)))
             break;
-        }
 
         std::string key;
         key.resize(keyLength);
 
-        if (!file.read(&key[0], keyLength)) {
+        if (!file.read(&key[0], keyLength))
             return false;
-        }
 
         data value;
-        if (!file.read(reinterpret_cast<char*>(&value.data), sizeof(value.data))) {
+        if (!file.read(reinterpret_cast<char*>(&value.data), sizeof(value.data)))
             return false;
-        }
 
-        // Add the key-value pair to your settings
         settings[key] = value;
     }
 
